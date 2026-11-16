@@ -7,6 +7,8 @@ interface ConfirmDialogProps {
   title: string;
   children: ReactNode;
   confirmLabel: string;
+  /** Label of the button that closes the dialog without acting. */
+  cancelLabel?: string;
   confirmVariant?: ButtonVariant;
   loading?: boolean;
   error?: string;
@@ -20,6 +22,7 @@ export function ConfirmDialog({
   title,
   children,
   confirmLabel,
+  cancelLabel = "Cancel",
   confirmVariant = "primary",
   loading,
   error,
@@ -61,7 +64,7 @@ export function ConfirmDialog({
         )}
         <div className="mt-1.5 flex justify-end gap-2.5">
           <Button variant="secondary" onClick={onCancel} disabled={loading}>
-            Cancel
+            {cancelLabel}
           </Button>
           <Button
             variant={confirmVariant}

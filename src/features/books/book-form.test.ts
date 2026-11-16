@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   AGE_RANGE_ERROR,
   initialValues,
+  isDirty,
   toFormData,
   validateBook,
   type BookFormValues,
@@ -119,5 +120,17 @@ describe("toFormData", () => {
     expect(fd.get("title")).toBe("Ollie");
     expect(fd.get("age_max")).toBe("5");
     expect(fd.get("epub")).toBeInstanceOf(File);
+  });
+});
+
+describe("isDirty", () => {
+  it("is clean until something changes", () => {
+    expect(isDirty(initialValues(), undefined)).toBe(false);
+    expect(isDirty({ ...initialValues(), title: "Ollie" }, undefined)).toBe(
+      true,
+    );
+    expect(
+      isDirty({ ...initialValues(), epub: file("ollie.epub") }, undefined),
+    ).toBe(true);
   });
 });

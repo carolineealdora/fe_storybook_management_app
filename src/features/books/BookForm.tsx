@@ -5,9 +5,11 @@ import { Button } from "@/components/ui/Button";
 import { buttonStyles } from "@/components/ui/button-styles";
 import { Field } from "@/components/ui/Field";
 import { Input } from "@/components/ui/Input";
+import { LeaveGuard } from "@/components/ui/LeaveGuard";
 import { Textarea } from "@/components/ui/Textarea";
 import { PageHeader } from "@/features/shell/PageHeader";
 import { apiRequest } from "@/lib/api";
+import type { NavState } from "@/lib/navigation-state";
 import { ApiError, type AdminBook, type BookStatus } from "@/lib/types";
 import { AgeRangeField } from "./AgeRangeField";
 import {
@@ -16,6 +18,7 @@ import {
   coverError,
   epubError,
   initialValues,
+  isDirty,
   toFormData,
   validateBook,
   type BookFormErrors,
@@ -76,7 +79,12 @@ export function BookForm({ book }: BookFormProps) {
           body: toFormData(values),
         },
       );
-      navigate("/books");
+      navigate("/books", {
+        state: {
+          confirmedLeave: true,
+          notice: `“${values.title.trim()}” was saved.`,
+        } satisfies NavState,
+      });
     } catch (err) {
       setPending(false);
       const fileField =
@@ -232,6 +240,10 @@ export function BookForm({ book }: BookFormProps) {
           />
         </div>
       </div>
+      <LeaveGuard
+        when={isDirty(values, book) && !pending}
+        message="Your changes to this book haven't been saved and will be lost."
+      />
     </form>
   );
 }

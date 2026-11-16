@@ -1,4 +1,4 @@
-import { fireEvent, screen } from "@testing-library/react";
+import { fireEvent, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import type { AdminBook } from "@/lib/types";
@@ -200,5 +200,32 @@ describe("BookForm", () => {
 
     const error = await screen.findByText("File content is not a valid image.");
     expect(error).toHaveAttribute("id", "cover-error");
+  });
+
+  it("asks before leaving with unsaved changes, and stays on Keep editing (item 15)", async () => {
+    const user = userEvent.setup();
+    renderRoute(<BookForm />, "/books/new");
+    await user.type(screen.getByLabelText("Title *"), "Ollie");
+    await user.click(screen.getByRole("link", { name: "Cancel" }));
+
+    const dialog = screen.getByRole("dialog", {
+      name: "Leave without saving?",
+    });
+    await user.click(
+      within(dialog).getByRole("button", { name: "Keep editing" }),
+    );
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Title *")).toHaveValue("Ollie");
+
+    await user.click(screen.getByRole("link", { name: "Cancel" }));
+    await user.click(screen.getByRole("button", { name: "Leave page" }));
+    expect(await screen.findByText("Book list page")).toBeInTheDocument();
+  });
+
+  it("leaves a clean form without asking", async () => {
+    const user = userEvent.setup();
+    renderRoute(<BookForm />, "/books/new");
+    await user.click(screen.getByRole("link", { name: "Cancel" }));
+    expect(await screen.findByText("Book list page")).toBeInTheDocument();
   });
 });

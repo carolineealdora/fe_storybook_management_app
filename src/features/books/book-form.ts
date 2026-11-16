@@ -123,6 +123,22 @@ export function fileFieldFor(
   if (/epub|book file/i.test(message)) return "epub";
 }
 
+/** True once anything differs from what the form started with (a picked file always counts). */
+export function isDirty(v: BookFormValues, book?: AdminBook): boolean {
+  const start = initialValues(book);
+  const textKeys = [
+    "title",
+    "author",
+    "description",
+    "ageType",
+    "ageMin",
+    "ageMax",
+    "price",
+    "status",
+  ] as const;
+  return Boolean(v.cover || v.epub) || textKeys.some((k) => v[k] !== start[k]);
+}
+
 export function toFormData(v: BookFormValues): FormData {
   const fd = new FormData();
   fd.set("title", v.title.trim());
