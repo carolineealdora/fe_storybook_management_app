@@ -98,16 +98,14 @@ describe("BookTable", () => {
   it("keeps the dialog open with the error when delete fails", async () => {
     vi.stubGlobal(
       "fetch",
-      vi
-        .fn()
-        .mockResolvedValue(
-          new Response(
-            JSON.stringify({
-              error: { code: "GENERAL_ERROR", message: "Server is busy." },
-            }),
-            { status: 500 },
-          ),
+      vi.fn().mockResolvedValue(
+        new Response(
+          JSON.stringify({
+            error: { code: "GENERAL_ERROR", message: "Server is busy." },
+          }),
+          { status: 500 },
         ),
+      ),
     );
     const user = userEvent.setup();
     render(<BookTable books={[book({})]} filtered={false} />);
