@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import { MemoryRouter, useLocation } from "react-router";
@@ -40,5 +40,51 @@ describe("BookFilters", () => {
     expect(screen.getByLabelText("query")).toHaveTextContent(
       "?search=bear&status=published",
     );
+  });
+
+  it("searches as you type, after a short pause (item 14)", async () => {
+    const user = userEvent.setup();
+    renderFilters();
+    await user.type(
+      screen.getByRole("searchbox", { name: "Search by title" }),
+      "moon",
+    );
+    await waitFor(() =>
+      expect(screen.getByLabelText("query")).toHaveTextContent("?search=moon"),
+    );
+    // Focus stays in the box while the URL updates.
+    expect(
+      screen.getByRole("searchbox", { name: "Search by title" }),
+    ).toHaveFocus();
+  });
+
+  it("a pending search does not undo a status picked meanwhile", async () => {
+    const user = userEvent.setup();
+    renderFilters();
+    await user.type(
+      screen.getByRole("searchbox", { name: "Search by title" }),
+      "moon",
+    );
+    await user.click(screen.getByRole("radio", { name: "Draft" }));
+    await new Promise((r) => setTimeout(r, 400)); // past the debounce
+    expect(screen.getByLabelText("query")).toHaveTextContent(
+      "?search=moon&status=draft",
+    );
+  });
+
+  it("empties the box when the URL's search is cleared elsewhere (Clear filters)", () => {
+    const ui = (search: string) => (
+      <MemoryRouter>
+        <BookFilters search={search} status="all" />
+      </MemoryRouter>
+    );
+    const { rerender } = render(ui("bear"));
+    expect(
+      screen.getByRole("searchbox", { name: "Search by title" }),
+    ).toHaveValue("bear");
+    rerender(ui(""));
+    expect(
+      screen.getByRole("searchbox", { name: "Search by title" }),
+    ).toHaveValue("");
   });
 });

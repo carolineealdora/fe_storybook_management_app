@@ -1,9 +1,11 @@
-import { useRef, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useNavigate } from "react-router";
 import { SegmentedControl } from "@/components/ui/SegmentedControl";
 import type { BookStatus } from "@/lib/types";
 
 type StatusFilter = BookStatus | "all";
+
+const SEARCH_DEBOUNCE_MS = 300;
 
 const STATUS_OPTIONS: { value: StatusFilter; label: string }[] = [
   { value: "all", label: "All" },
@@ -21,9 +23,21 @@ interface BookFiltersProps {
 /** Filters live in the URL, so the filtered list survives reloads and links are shareable. */
 export function BookFilters({ search, status, busy }: BookFiltersProps) {
   const navigate = useNavigate();
-  const searchRef = useRef<HTMLInputElement>(null);
+  const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const [text, setText] = useState(search);
+  const [syncedSearch, setSyncedSearch] = useState(search);
+
+  // The URL changed from outside (e.g. "Clear filters"): show its search text.
+  // Skip when it's just our own trimmed copy of what's being typed.
+  if (search !== syncedSearch) {
+    setSyncedSearch(search);
+    if (search !== text.trim()) setText(search);
+  }
+
+  useEffect(() => () => clearTimeout(timer.current), []);
 
   function go(nextSearch: string, nextStatus: StatusFilter) {
+    clearTimeout(timer.current); // a pending typed search is folded into this navigation
     const params = new URLSearchParams();
     if (nextSearch.trim()) params.set("search", nextSearch.trim());
     if (nextStatus !== "all") params.set("status", nextStatus);
@@ -33,7 +47,13 @@ export function BookFilters({ search, status, busy }: BookFiltersProps) {
 
   function onSearch(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    go(String(new FormData(e.currentTarget).get("search") ?? ""), status);
+    go(text, status);
+  }
+
+  function onType(value: string) {
+    setText(value);
+    clearTimeout(timer.current);
+    timer.current = setTimeout(() => go(value, status), SEARCH_DEBOUNCE_MS);
   }
 
   return (
@@ -46,12 +66,11 @@ export function BookFilters({ search, status, busy }: BookFiltersProps) {
           Search by title
         </label>
         <input
-          key={search}
-          ref={searchRef}
           id="book-search"
           name="search"
           type="search"
-          defaultValue={search}
+          value={text}
+          onChange={(e) => onType(e.target.value)}
           placeholder="Search by title"
           className="h-9.5 w-full rounded-md border border-line-strong bg-surface px-3 text-sm placeholder:text-placeholder focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-ink"
         />
@@ -61,7 +80,7 @@ export function BookFilters({ search, status, busy }: BookFiltersProps) {
         name="status"
         options={STATUS_OPTIONS}
         value={status}
-        onChange={(v) => go(searchRef.current?.value ?? search, v)}
+        onChange={(v) => go(text, v)}
       />
       {busy && (
         <span role="status" className="text-small text-muted">
