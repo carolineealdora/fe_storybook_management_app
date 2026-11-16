@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#E7E2D6;font-family:'Nunito',sans-serif;color:#2D291F}a{color:#DF552E}a:hover{color:#B8441F}*{box-sizing:border-box}</style>
+</helmet>
+
+<section id="library" data-screen-label="App 1 · Storybook Library" style="width:max-content;min-width:100%;padding:72px 72px 96px;background:#FFF7D7;display:flex;flex-direction:column;gap:56px">
+  <div style="display:flex;align-items:flex-end;gap:32px;border-bottom:3px solid #F05A25;padding-bottom:28px">
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div style="display:flex;gap:10px;align-items:center">
+        <span style="font:600 14px 'IBM Plex Mono',monospace;background:#F05A25;color:#fff;padding:6px 12px;border-radius:999px">APP 01</span>
+        <span style="font:600 14px 'IBM Plex Mono',monospace;color:#595959">Parents & kids · mobile / tablet</span>
+      </div>
+      <h1 style="margin:0;font:800 64px/1 'Baloo 2',sans-serif;color:#2D291F">StoryBook <span style="color:#DF552E">by MainStory</span></h1>
+    </div>
+    <div style="margin-left:auto;display:flex;gap:16px;font:600 14px Nunito;color:#595959;flex:none;white-space:nowrap">
+      <div style="display:flex;align-items:center;gap:8px"><span style="flex:none;width:18px;height:18px;border-radius:6px;background:#fff;border:2px solid #DF552E"></span>Parent view: white + orange</div>
+      <div style="display:flex;align-items:center;gap:8px"><span style="flex:none;width:18px;height:18px;border-radius:6px;background:#BBE9EB;border:2px solid #0B6E73"></span>Child view: teal + yellow</div>
+    </div>
+  </div>
+
+  <!-- ROW A: Parent view, browse & buy -->
+  <div style="display:flex;flex-direction:column;gap:20px">
+    <h2 style="margin:0;font:700 28px 'Baloo 2';color:#DF552E">Parent view · browse & buy</h2>
+    <div style="display:flex;gap:40px;align-items:flex-start">
+
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="font:500 13px 'IBM Plex Mono',monospace;color:#595959">A1 · Login</div>
+        <div style="width:360px;height:740px;border-radius:40px;border:8px solid #2D291F;background:#fff;overflow:hidden;display:flex;flex-direction:column;padding:56px 28px 32px;gap:28px">
+          <div style="height:200px;border-radius:28px;background:#FFF2CC;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden">
+            <div style="position:absolute;width:140px;height:140px;border-radius:50%;background:#FFCC08;top:-30px;right:-30px"></div>
+            <div style="position:absolute;width:90px;height:90px;border-radius:50%;background:#3DBFC5;bottom:-20px;left:24px"></div>
+            <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font:800 40px/1 'Baloo 2';color:#DF552E">StoryBook</div><div style="font:700 14px Nunito;color:#2D291F">by MainStory</div></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:4px"><div style="font:800 28px/1.1 'Baloo 2'">Welcome back</div><div style="font:600 15px Nunito;color:#595959">Log in to open your family library.</div></div>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <label style="display:flex;flex-direction:column;gap:6px;font:700 13px Nunito;color:#595959">Email<div style="height:52px;border-radius:14px;border:2px solid #EDE3CB;padding:0 16px;display:flex;align-items:center;font:600 16px Nunito;color:#2D291F">ayu.lestari@gmail.com</div></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font:700 13px Nunito;color:#595959">Password<div style="height:52px;border-radius:14px;border:2px solid #DF552E;padding:0 16px;display:flex;align-items:center;font:700 18px Nunito;letter-spacing:4px">••••••••</div></label>
+            <div style="font:700 13px Nunito;color:#C2410C;background:#FFDCCF;padding:10px 12px;border-radius:12px">Email or password is incorrect</div>
+          </div>
+          <div style="margin-top:auto;height:56px;border-radius:16px;background:#DF552E;color:#fff;font:800 18px Nunito;display:flex;align-items:center;justify-content:center">Log in</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="font:500 13px 'IBM Plex Mono',monospace;color:#595959">A2 · Home · Free account</div>
+        <div style="width:360px;height:740px;border-radius:40px;border:8px solid #2D291F;background:#FFFCF3;overflow:hidden;display:flex;flex-direction:column">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:40px 14px 12px;background:#fff;border-bottom:1px solid #F3E9D2">
+            <span style="padding:6px 10px;border-radius:999px;background:#EFEDE8;font:800 11px Nunito;color:#595959">Free</span>
+            <div style="display:flex;gap:6px;align-items:center">
+              
+              <div style="display:flex;padding:3px;border-radius:999px;background:#FFF2CC"><span style="padding:7px 9px;border-radius:999px;background:#DF552E;color:#fff;font:800 11px Nunito">Parent</span><span style="padding:7px 9px;font:800 11px Nunito;color:#595959">Child</span></div>
+            </div>
+          </div>
+          <div style="padding:16px 16px 0;display:flex;flex-direction:column;gap:14px;flex:1;overflow:hidden">
+            <div style="position:relative;background:#FFCC08;border-radius:18px;padding:14px 44px 14px 14px;display:flex;align-items:center;gap:12px"><div style="display:flex;flex-direction:column;gap:2px;flex:1"><div style="font:800 15px/1.2 'Baloo 2';color:#2D291F">Read every book for Rp 49.000/month</div><div style="font:600 12px Nunito;color:#4A3B00">Unlock the whole library</div></div><span style="height:40px;padding:0 14px;border-radius:12px;background:#2D291F;color:#fff;font:800 13px Nunito;display:flex;align-items:center;flex:none">Subscribe</span><span style="position:absolute;top:6px;right:6px;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:800 15px Nunito;color:#2D291F">✕</span></div><div style="font:800 24px/1.1 'Baloo 2'">All books</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 12px">
+              <sc-for list="{{ books }}" as="b" hint-placeholder-count="6">
+                <div style="display:flex;flex-direction:column;gap:6px">
+                  <div style="height:176px;border-radius:16px;background:{{ b.bg }};position:relative;padding:34px 12px 12px;display:flex;align-items:flex-end;overflow:hidden">
+                    <span style="position:absolute;top:8px;left:8px;padding:3px 8px;border-radius:999px;background:#fff;font:800 11px Nunito">{{ b.age }}</span>
+                    <div style="font:800 17px/1.05 'Baloo 2';color:{{ b.ink }};padding-right:30px">{{ b.title }}</div>
+                    <sc-if value="{{ b.locked }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;right:8px;bottom:8px;width:30px;height:30px;border-radius:50%;background:#2D291F;display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 16 16"><rect x="3" y="7" width="10" height="8" rx="2" fill="#fff"></rect><path d="M5 7V5a3 3 0 0 1 6 0v2" stroke="#fff" stroke-width="2" fill="none"></path></svg></span></sc-if>
+                    <sc-if value="{{ b.free }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;right:8px;bottom:8px;padding:4px 9px;border-radius:999px;background:#0B6E73;color:#fff;font:800 11px Nunito">Free</span></sc-if>
+                  </div>
+                  <div style="font:700 14px/1.2 Nunito">{{ b.title }}</div>
+                  <div style="font:800 13px Nunito;color:{{ b.priceInk }}">{{ b.priceLabel }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #F3E9D2;background:#fff;padding:8px 8px 20px">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px;font:800 12px Nunito;color:#DF552E"><span style="width:22px;height:22px;border-radius:7px;background:#DF552E"></span>Home</div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px;font:800 12px Nunito;color:#8F887A"><svg width="22" height="22" viewBox="0 0 22 22" style="flex:none"><polygon points="11,2.5 20.5,19.5 1.5,19.5" fill="none" stroke="#8F887A" stroke-width="2.5" stroke-linejoin="round"></polygon></svg>My Book</div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px;font:800 12px Nunito;color:#8F887A"><span style="width:22px;height:22px;border-radius:50%;border:2.5px solid #8F887A"></span>Settings</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="font:500 13px 'IBM Plex Mono',monospace;color:#595959">A3 · Book detail · locked</div>
+        <div style="width:360px;height:740px;border-radius:40px;border:8px solid #2D291F;background:#fff;overflow:hidden;display:flex;flex-direction:column">
+          <div style="height:300px;background:#FFCC08;position:relative;padding:40px 20px 20px;display:flex;flex-direction:column">
+            <span style="width:44px;height:44px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font:800 20px Nunito">‹</span>
+            <div style="margin:auto auto 0;width:150px;height:200px;border-radius:14px;background:#FFF2CC;box-shadow:0 10px 24px rgba(90,69,0,.25);position:relative;display:flex;align-items:flex-end;padding:12px;font:800 20px/1 'Baloo 2';color:#5A4500">Kiko the Little Duck<span style="position:absolute;top:8px;left:8px;padding:3px 8px;border-radius:999px;background:#fff;font:800 11px Nunito;color:#2D291F">1–3</span></div>
+          </div>
+          <div style="padding:18px 20px;display:flex;flex-direction:column;gap:10px;flex:1">
+            <div style="display:flex;flex-direction:column;gap:2px"><div style="font:800 24px/1.1 'Baloo 2'">Kiko the Little Duck</div><div style="font:600 14px Nunito;color:#595959">by Dimas Arya · Ages 1–3</div></div>
+            <div style="font:500 14px/1.5 Nunito;color:#4A453B;text-wrap:pretty">Kiko is the smallest duck on the pond. One rainy morning, Kiko learns that small feet can still make big splashes.</div>
+            <div style="font:800 22px 'Baloo 2';color:#DF552E">Rp 29.000</div>
+            <div style="margin-top:auto;display:flex;flex-direction:column;gap:10px">
+              <div style="height:54px;border-radius:16px;background:#DF552E;color:#fff;font:800 17px Nunito;display:flex;align-items:center;justify-content:center">Buy Now</div>
+              <div style="border-radius:16px;background:#F1E5FF;padding:12px 14px;display:flex;align-items:center;gap:10px">
+                <div style="display:flex;flex-direction:column;gap:2px;flex:1"><div style="font:800 14px Nunito;color:#3A2558">Read all books for Rp 49.000/month</div><div style="font:600 12px Nunito;color:#5B4B73">Subscribe and unlock the whole library</div></div>
+                <span style="font:800 20px Nunito;color:#3A2558">›</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="font:500 13px 'IBM Plex Mono',monospace;color:#595959">A4 · Book detail · subscriber</div>
+        <div style="width:360px;height:740px;border-radius:40px;border:8px solid #2D291F;background:#fff;overflow:hidden;display:flex;flex-direction:column">
+          <div style="height:300px;background:#C0ADD6;position:relative;padding:40px 20px 20px;display:flex;flex-direction:column">
+            <div style="display:flex;justify-content:space-between;align-items:center"><span style="width:44px;height:44px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font:800 20px Nunito">‹</span><span style="padding:6px 10px;border-radius:999px;background:#0B6E73;color:#fff;font:800 11px Nunito">Subscriber</span></div>
+            <div style="margin:auto auto 0;width:150px;height:200px;border-radius:14px;background:#F1E5FF;box-shadow:0 10px 24px rgba(58,37,88,.25);position:relative;display:flex;align-items:flex-end;padding:12px;font:800 20px/1 'Baloo 2';color:#3A2558">Mimi's Big Sneeze<span style="position:absolute;top:8px;left:8px;padding:3px 8px;border-radius:999px;background:#fff;font:800 11px Nunito;color:#2D291F">3+</span></div>
+          </div>
+          <div style="padding:18px 20px;display:flex;flex-direction:column;gap:10px;flex:1">
+            <div style="display:flex;flex-direction:column;gap:2px"><div style="font:800 24px/1.1 'Baloo 2'">Mimi's Big Sneeze</div><div style="font:600 14px Nunito;color:#595959">by Tika Anggraini · Ages 3+</div></div>
+            <div style="font:500 14px/1.5 Nunito;color:#4A453B;text-wrap:pretty">Mimi the cat has a sneeze so big it blows the leaves off the trees. Can her friends help her find a cure before the picnic?</div>
+            <div style="font:800 22px 'Baloo 2';color:#8F887A">Rp 27.000</div>
+            <div style="margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:10px">
+              <div style="height:54px;border-radius:16px;background:#EFEDE8;color:#8F887A;font:800 16px Nunito;display:flex;align-items:center;justify-content:center">Subscribed</div>
+              <div style="height:54px;border-radius:16px;background:#DF552E;color:#fff;font:800 16px Nunito;display:flex;align-items:center;justify-content:center">Read</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="font:500 13px 'IBM Plex Mono',monospace;color:#595959">A5 · Checkout (1 book)</div>
+        <div style="width:360px;height:740px;border-radius:40px;border:8px solid #2D291F;background:#FFFCF3;overflow:hidden;display:flex;flex-direction:column">
+          <div style="display:flex;align-items:center;gap:12px;padding:40px 16px 14px;background:#fff;border-bottom:1px solid #F3E9D2"><span style="width:44px;height:44px;border-radius:50%;background:#FFF2CC;display:flex;align-items:center;justify-content:center;font:800 20px Nunito">‹</span><span style="font:800 22px 'Baloo 2'">Checkout</span></div>
+          <div style="padding:20px 16px;display:flex;flex-direction:column;gap:16px;flex:1">
+            <div style="background:#fff;border-radius:18px;padding:12px;display:flex;gap:14px;align-items:center;border:1px solid #F3E9D2">
+              <div style="width:72px;height:96px;border-radius:10px;background:#FFCC08;flex:none"></div>
+              <div style="display:flex;flex-direction:column;gap:4px"><div style="font:800 17px/1.1 'Baloo 2'">Kiko the Little Duck</div><div style="font:600 13px Nunito;color:#595959">Ages 1–3 · Yours forever</div></div>
+            </div>
+            <div style="background:#fff;border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:10px;border:1px solid #F3E9D2;font:600 15px Nunito">
+              <div style="display:flex;justify-content:space-between"><span style="color:#595959">Book price</span><span>Rp 29.000</span></div>
+              <div style="height:1px;background:#F3E9D2"></div>
+              <div style="display:flex;justify-content:space-between;font:800 17px Nunito"><span>Total</span><span style="color:#DF552E">Rp 29.000</span></div>
+            </div>
+            <div style="background:#BBE9EB;border-radius:14px;padding:12px 14px;font:600 13px/1.4 Nunito;color:#0B4F53">One book per order. Prefer the whole library? Subscribe for Rp 49.000/month.</div>
+            <div style="margin-top:auto;height:56px;border-radius:16px;background:#DF552E;color:#fff;font:800 18px Nunito;display:flex;align-items:center;justify-content:center">Pay Rp 29.000</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="font:500 13px 'IBM Plex Mono',monospace;color:#595959">A6 · Payment success</div>
+        <div style="width:360px;height:740px;border-radius:40px;border:8px solid #2D291F;background:#fff;overflow:hidden;display:flex;flex-direction:column;align-items:center;padding:120px 28px 32px;gap:20px;text-align:center">
+          <div style="width:120px;height:120px;border-radius:50%;background:#BBE9EB;display:flex;align-items:center;justify-content:center"><div style="width:72px;height:72px;border-radius:50%;background:#3DBFC5;display:flex;align-items:center;justify-content:center;color:#fff;font:800 36px Nunito">✓</div></div>
+          <div style="font:800 28px/1.1 'Baloo 2'">Kiko is yours!</div>
+          <div style="font:600 15px/1.5 Nunito;color:#595959;text-wrap:pretty">Payment received. Kiko the Little Duck is now in My Book, ready to read anytime.</div>
+          <div style="margin-top:auto;width:100%;display:flex;flex-direction:column;gap:10px">
+            <div style="height:56px;border-radius:16px;background:#DF552E;color:#fff;font:800 18px Nunito;display:flex;align-items:center;justify-content:center">Read Now</div>
+            <div style="height:52px;border-radius:16px;border:2px solid #EDE3CB;font:800 16px Nunito;display:flex;align-items:center;justify-content:center">Back to Home</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="font:500 13px 'IBM Plex Mono',monospace;color:#595959">A7 · Payment failed</div>
+        <div style="width:360px;height:740px;border-radius:40px;border:8px solid #2D291F;background:#fff;overflow:hidden;display:flex;flex-direction:column;align-items:center;padding:120px 28px 32px;gap:20px;text-align:center">
+          <div style="width:120px;height:120px;border-radius:50%;background:#FFDCCF;display:flex;align-items:center;justify-content:center"><div style="width:72px;height:72px;border-radius:50%;background:#DF552E;display:flex;align-items:center;justify-content:center;color:#fff;font:800 36px Nunito">!</div></div>
+          <div style="font:800 28px/1.1 'Baloo 2'">Payment didn't go through</div>
+          <div style="font:600 15px/1.5 Nunito;color:#595959;text-wrap:pretty">You weren't charged and the book is still locked. You can try again from checkout.</div>
+          <div style="margin-top:auto;width:100%;display:flex;flex-direction:column;gap:10px">
+            <div style="height:56px;border-radius:16px;background:#DF552E;color:#fff;font:800 18px Nunito;display:flex;align-items:center;justify-content:center">Back to Checkout</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW B: Parent account -->
+  <div style="display:flex;flex-direction:column;gap:20px">
+    <h2 style="margin:0;font:700 28px 'Baloo 2';color:#DF552E">Parent view · subscription & account</h2>
+    <div style="display:flex;gap:40px;align-items:flex-start">
+
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="font:500 13px 'IBM Plex Mono',monospace;color:#595959">B1 · Subscription offer</div>
+        <div style="width:360px;height:740px;border-radius:40px;border:8px solid #2D291F;background:#fff;overflow:hidden;display:flex;flex-direction:column">
+          <div style="background:#FFCC08;padding:40px 20px 28px;display:flex;flex-direction:column;gap:16px;position:relative;overflow:hidden">
+            <div style="position:absolute;width:180px;height:180px;border-radius:50%;background:#FFF2CC;opacity:.6;right:-60px;top:-40px"></div>
+            <span style="position:relative;width:44px;height:44px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font:800 20px Nunito">‹</span>
+            <div style="position:relative;font:800 34px/1 'Baloo 2';color:#2D291F">Read every book in the library</div>
+            <div style="position:relative;display:flex;align-items:baseline;gap:6px"><span style="font:800 32px 'Baloo 2'">Rp 49.000</span><span style="font:700 15px Nunito">/ month</span></div>
+          </div>
+          <div style="padding:22px 20px;display:flex;flex-direction:column;gap:14px;flex:1">
+            <sc-for list="{{ benefits }}" as="t" hint-placeholder-count="3">
+              <div style="display:flex;gap:12px;align-items:center;font:700 15px Nunito"><span style="width:28px;height:28px;border-radius:50%;background:#BBE9EB;color:#0B6E73;display:flex;align-items:center;justify-content:center;font:800 14px Nunito;flex:none">✓</span>{{ t }}</div>
+            </sc-for>
+            <div style="font:600 12px/1.5 Nunito;color:#595959">Renews automatically every month. Cancel anytime in Settings.</div>
+            <div style="margin-top:auto;height:56px;border-radius:16px;background:#DF552E;color:#fff;font:800 18px Nunito;display:flex;align-items:center;justify-content:center">Checkout</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="font:500 13px 'IBM Plex Mono',monospace;color:#595959">B2 · Manage subscription + cancel dialog</div>
+        <div style="width:360px;height:740px;border-radius:40px;border:8px solid #2D291F;background:#FFFCF3;overflow:hidden;display:flex;flex-direction:column;position:relative">
+          <div style="display:flex;align-items:center;gap:12px;padding:40px 16px 14px;background:#fff;border-bottom:1px solid #F3E9D2"><span style="width:44px;height:44px;border-radius:50%;background:#FFF2CC;display:flex;align-items:center;justify-content:center;font:800 20px Nunito">‹</span><span style="font:800 22px 'Baloo 2'">Subscription</span></div>
+          <div style="padding:20px 16px;display:flex;flex-direction:column;gap:14px">
+            <div style="background:#fff;border-radius:20px;padding:18px;border:1px solid #F3E9D2;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:800 18px 'Baloo 2'">Monthly plan</span><span style="padding:4px 10px;border-radius:999px;background:#BBE9EB;color:#0B4F53;font:800 12px Nunito">Active</span></div>
+              <div style="display:flex;justify-content:space-between;font:600 14px Nunito"><span style="color:#595959">Price</span><span>Rp 49.000 / month</span></div>
+              <div style="display:flex;justify-content:space-between;font:600 14px Nunito"><span style="color:#595959">Next renewal</span><span>16 Dec 2026</span></div>
+            </div>
+            <div style="height:52px;border-radius:16px;border:2px solid #DF552E;color:#DF552E;font:800 16px Nunito;display:flex;align-items:center;justify-content:center">Cancel subscription</div>
+          </div>
+          <div style="position:absolute;inset:0;background:rgba(45,41,31,.5);display:flex;align-items:flex-end">
+            <div style="background:#fff;width:100%;border-radius:28px 28px 0 0;padding:24px 20px 28px;display:flex;flex-direction:column;gap:12px">
+              <div style="font:800 24px/1.1 'Baloo 2'">Cancel subscription?</div>
+              <div style="font:600 14px/1.5 Nunito;color:#4A453B;text-wrap:pretty">Books you didn't buy will lock right away. There's no refund for the rest of this month. Books you bought stay in My Book.</div>
+              <div style="height:54px;border-radius:16px;background:#DF552E;color:#fff;font:800 16px Nunito;display:flex;align-items:center;justify-content:center;margin-top:6px">Keep subscription</div>
+              <div style="height:50px;border-radius:16px;font:800 15px Nunito;color:#595959;display:flex;align-items:center;justify-content:center">Yes, cancel now</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="font:500 13px 'IBM Plex Mono',monospace;color:#595959">B3 · My Book</div>
+        <div style="width:360px;height:740px;border-radius:40px;border:8px solid #2D291F;background:#FFFCF3;overflow:hidden;display:flex;flex-direction:column">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:40px 14px 12px;background:#fff;border-bottom:1px solid #F3E9D2">
+            <span style="padding:6px 10px;border-radius:999px;background:#EFEDE8;font:800 11px Nunito;color:#595959">Free</span>
+            <div style="display:flex;gap:6px;align-items:center">
+              
+              <div style="display:flex;padding:3px;border-radius:999px;background:#FFF2CC"><span style="padding:7px 9px;border-radius:999px;background:#DF552E;color:#fff;font:800 11px Nunito">Parent</span><span style="padding:7px 9px;font:800 11px Nunito;color:#595959">Child</span></div>
+            </div>
+          </div>
+          <div style="padding:16px;display:flex;flex-direction:column;gap:12px;flex:1">
+            <div style="position:relative;background:#FFCC08;border-radius:18px;padding:14px 44px 14px 14px;display:flex;align-items:center;gap:12px"><div style="display:flex;flex-direction:column;gap:2px;flex:1"><div style="font:800 15px/1.2 'Baloo 2';color:#2D291F">Read every book for Rp 49.000/month</div><div style="font:600 12px Nunito;color:#4A3B00">Unlock the whole library</div></div><span style="height:40px;padding:0 14px;border-radius:12px;background:#2D291F;color:#fff;font:800 13px Nunito;display:flex;align-items:center;flex:none">Subscribe</span><span style="position:absolute;top:6px;right:6px;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:800 15px Nunito;color:#2D291F">✕</span></div><div style="display:flex;flex-direction:column;gap:2px"><div style="font:800 24px/1.1 'Baloo 2'">My Book</div><div style="font:600 13px Nunito;color:#595959">Books you bought. Newest first.</div></div>
+            <sc-for list="{{ myBooks }}" as="b" hint-placeholder-count="2">
+              <div style="background:#fff;border-radius:18px;padding:10px;display:flex;gap:12px;align-items:center;border:1px solid #F3E9D2">
+                <div style="width:64px;height:84px;border-radius:10px;background:{{ b.bg }};flex:none"></div>
+                <div style="display:flex;flex-direction:column;gap:3px;flex:1"><div style="font:800 16px/1.1 'Baloo 2'">{{ b.title }}</div><div style="font:600 12px Nunito;color:#595959">Ages {{ b.age }} · Bought {{ b.date }}</div></div>
+                <span style="height:44px;padding:0 16px;border-radius:14px;background:#DF552E;color:#fff;font:800 14px Nunito;display:flex;align-items:center">Read</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #F3E9D2;background:#fff;padding:8px 8px 20px">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px;font:800 12px Nunito;color:#8F887A"><span style="width:22px;height:22px;border-radius:7px;border:2.5px solid #8F887A"></span>Home</div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px;font:800 12px Nunito;color:#DF552E"><svg width="22" height="22" viewBox="0 0 22 22" style="flex:none"><polygon points="11,2.5 20.5,19.5 1.5,19.5" fill="#DF552E" stroke="#DF552E" stroke-width="2.5" stroke-linejoin="round"></polygon></svg>My Book</div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px;font:800 12px Nunito;color:#8F887A"><span style="width:22px;height:22px;border-radius:50%;border:2.5px solid #8F887A"></span>Settings</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="font:500 13px 'IBM Plex Mono',monospace;color:#595959">B4 · Settings</div>
+        <div style="width:360px;height:740px;border-radius:40px;border:8px solid #2D291F;background:#FFFCF3;overflow:hidden;display:flex;flex-direction:column">
+          <div style="padding:40px 16px 14px;background:#fff;border-bottom:1px solid #F3E9D2;font:800 22px 'Baloo 2'">Settings</div>
+          <div style="padding:16px;display:flex;flex-direction:column;gap:14px;flex:1">
+            <div style="background:#fff;border-radius:18px;border:1px solid #F3E9D2;padding:14px;display:flex;flex-direction:column;gap:12px">
+              <label style="display:flex;flex-direction:column;gap:6px;font:700 12px Nunito;color:#595959">Name<div style="height:48px;border-radius:12px;border:2px solid #EDE3CB;padding:0 14px;display:flex;align-items:center;font:600 15px Nunito;color:#2D291F">Ayu Lestari</div></label>
+              <label style="display:flex;flex-direction:column;gap:6px;font:700 12px Nunito;color:#595959">Email<div style="height:48px;border-radius:12px;background:#F6F3EC;padding:0 14px;display:flex;align-items:center;font:600 15px Nunito;color:#8F887A">ayu.lestari@gmail.com</div></label>
+            </div>
+            <div style="background:#fff;border-radius:18px;border:1px solid #F3E9D2;display:flex;flex-direction:column">
+              <sc-for list="{{ settingsLinks }}" as="l" hint-placeholder-count="4">
+                <div style="height:54px;padding:0 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #F6F0E0;font:700 15px Nunito"><span>{{ l.label }}</span><span style="font:700 13px Nunito;color:#8F887A">{{ l.meta }} ›</span></div>
+              </sc-for>
+            </div>
+            <div style="height:52px;border-radius:16px;border:2px solid #FFDCCF;color:#C2410C;font:800 15px Nunito;display:flex;align-items:center;justify-content:center">Log out</div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #F3E9D2;background:#fff;padding:8px 8px 20px">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px;font:800 12px Nunito;color:#8F887A"><span style="width:22px;height:22px;border-radius:7px;border:2.5px solid #8F887A"></span>Home</div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px;font:800 12px Nunito;color:#8F887A"><svg width="22" height="22" viewBox="0 0 22 22" style="flex:none"><polygon points="11,2.5 20.5,19.5 1.5,19.5" fill="none" stroke="#8F887A" stroke-width="2.5" stroke-linejoin="round"></polygon></svg>My Book</div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px;font:800 12px Nunito;color:#DF552E"><span style="width:22px;height:22px;border-radius:50%;background:#DF552E"></span>Settings</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="font:500 13px 'IBM Plex Mono',monospace;color:#595959">B5 · Set PIN</div>
+        <div style="width:360px;height:740px;border-radius:40px;border:8px solid #2D291F;background:#fff;overflow:hidden;display:flex;flex-direction:column">
+          <div style="display:flex;align-items:center;gap:12px;padding:40px 16px 14px;border-bottom:1px solid #F3E9D2"><span style="width:44px;height:44px;border-radius:50%;background:#FFF2CC;display:flex;align-items:center;justify-content:center;font:800 20px Nunito">‹</span><span style="font:800 22px 'Baloo 2'">Parent PIN</span></div>
+          <div style="padding:24px 20px;display:flex;flex-direction:column;gap:24px;flex:1">
+            <div style="font:600 14px/1.5 Nunito;color:#595959;text-wrap:pretty">You'll need this 4-digit PIN to leave Child view.</div>
+            <div style="display:flex;flex-direction:column;gap:10px"><div style="font:800 14px Nunito">New PIN</div>
+              <div style="display:flex;gap:12px"><span style="width:60px;height:64px;border-radius:16px;border:2px solid #DF552E;display:flex;align-items:center;justify-content:center;font:800 26px Nunito">•</span><span style="width:60px;height:64px;border-radius:16px;border:2px solid #DF552E;display:flex;align-items:center;justify-content:center;font:800 26px Nunito">•</span><span style="width:60px;height:64px;border-radius:16px;border:2px solid #DF552E;display:flex;align-items:center;justify-content:center;font:800 26px Nunito">•</span><span style="width:60px;height:64px;border-radius:16px;border:2px solid #DF552E;display:flex;align-items:center;justify-content:center;font:800 26px Nunito">•</span></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px"><div style="font:800 14px Nunito">Confirm PIN</div>
+              <div style="display:flex;gap:12px"><span style="width:60px;height:64px;border-radius:16px;border:2px solid #DF552E;display:flex;align-items:center;justify-content:center;font:800 26px Nunito">•</span><span style="width:60px;height:64px;border-radius:16px;border:2px solid #DF552E;display:flex;align-items:center;justify-content:center;font:800 26px Nunito">•</span><span style="width:60px;height:64px;border-radius:16px;border:2px solid #EDE3CB"></span><span style="width:60px;height:64px;border-radius:16px;border:2px solid #EDE3CB"></span></div>
+            </div>
+            <div style="font:600 12px/1.5 Nunito;color:#595959;background:#FFF7D7;padding:10px 12px;border-radius:12px">Changing an existing PIN asks for your account password first.</div>
+            <div style="margin-top:auto;height:56px;border-radius:16px;background:#DF552E;color:#fff;font:800 18px Nunito;display:flex;align-items:center;justify-content:center">Save PIN</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="font:500 13px 'IBM Plex Mono',monospace;color:#595959">B6 · Order history</div>
+        <div style="width:360px;height:740px;border-radius:40px;border:8px solid #2D291F;background:#FFFCF3;overflow:hidden;display:flex;flex-direction:column">
+          <div style="display:flex;align-items:center;gap:12px;padding:40px 16px 14px;background:#fff;border-bottom:1px solid #F3E9D2"><span style="width:44px;height:44px;border-radius:50%;background:#FFF2CC;display:flex;align-items:center;justify-content:center;font:800 20px Nunito">‹</span><span style="font:800 22px 'Baloo 2'">Order history</span></div>
+          <div style="padding:16px;display:flex;flex-direction:column;gap:10px">
+            <sc-for list="{{ orders }}" as="o" hint-placeholder-count="3">
+              <div style="background:#fff;border-radius:16px;border:1px solid #F3E9D2;padding:14px;display:flex;flex-direction:column;gap:6px">
+                <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:700 12px Nunito;color:#595959">{{ o.date }}</span><span style="padding:3px 10px;border-radius:999px;background:{{ o.bg }};color:{{ o.ink }};font:800 12px Nunito">{{ o.status }}</span></div>
+                <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:800 16px 'Baloo 2'">{{ o.title }}</span><span style="font:800 14px Nunito">{{ o.price }}</span></div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="font:500 13px 'IBM Plex Mono',monospace;color:#595959">B7 · Subscription history</div>
+        <div style="width:360px;height:740px;border-radius:40px;border:8px solid #2D291F;background:#FFFCF3;overflow:hidden;display:flex;flex-direction:column">
+          <div style="display:flex;align-items:center;gap:12px;padding:40px 16px 14px;background:#fff;border-bottom:1px solid #F3E9D2"><span style="width:44px;height:44px;border-radius:50%;background:#FFF2CC;display:flex;align-items:center;justify-content:center;font:800 20px Nunito">‹</span><span style="font:800 22px 'Baloo 2'">Subscription history</span></div>
+          <div style="padding:16px;display:flex;flex-direction:column;gap:10px">
+            <sc-for list="{{ subs }}" as="s" hint-placeholder-count="3">
+              <div style="background:#fff;border-radius:16px;border:1px solid #F3E9D2;padding:14px;display:flex;flex-direction:column;gap:6px">
+                <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:800 16px 'Baloo 2'">{{ s.start }} – {{ s.end }}</span><span style="padding:3px 10px;border-radius:999px;background:{{ s.bg }};color:{{ s.ink }};font:800 12px Nunito">{{ s.status }}</span></div>
+                <div style="display:flex;justify-content:space-between;font:600 13px Nunito;color:#595959"><span>Monthly · {{ s.type }}</span><span style="font:800 14px Nunito;color:#2D291F">{{ s.price }}</span></div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW C: Child view -->
+  <div style="display:flex;flex-direction:column;gap:20px">
+    <h2 style="margin:0;font:700 28px 'Baloo 2';color:#0B6E73">Child view · switching & browsing</h2>
+    <div style="display:flex;gap:40px;align-items:flex-start">
+
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="font:500 13px 'IBM Plex Mono',monospace;color:#595959">C1 · Toggle tapped, no PIN yet</div>
+        <div style="width:360px;height:740px;border-radius:40px;border:8px solid #2D291F;background:#FFFCF3;overflow:hidden;display:flex;flex-direction:column;position:relative">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:40px 14px 12px;background:#fff;border-bottom:1px solid #F3E9D2">
+            <span style="padding:6px 10px;border-radius:999px;background:#EFEDE8;font:800 11px Nunito;color:#595959">Free</span>
+            <div style="display:flex;gap:6px;align-items:center"><div style="display:flex;padding:3px;border-radius:999px;background:#FFF2CC;outline:3px solid #3DBFC5"><span style="padding:7px 9px;border-radius:999px;background:#DF552E;color:#fff;font:800 11px Nunito">Parent</span><span style="padding:7px 9px;font:800 11px Nunito;color:#595959">Child</span></div></div>
+          </div>
+          <div style="padding:16px 16px 0"><div style="position:relative;background:#FFCC08;border-radius:18px;padding:14px 44px 14px 14px;display:flex;align-items:center;gap:12px"><div style="display:flex;flex-direction:column;gap:2px;flex:1"><div style="font:800 15px/1.2 'Baloo 2';color:#2D291F">Read every book for Rp 49.000/month</div><div style="font:600 12px Nunito;color:#4A3B00">Unlock the whole library</div></div><span style="height:40px;padding:0 14px;border-radius:12px;background:#2D291F;color:#fff;font:800 13px Nunito;display:flex;align-items:center;flex:none">Subscribe</span><span style="position:absolute;top:6px;right:6px;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:800 15px Nunito;color:#2D291F">✕</span></div></div><div style="padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <sc-for list="{{ books }}" as="b" hint-placeholder-count="4"><div style="height:176px;border-radius:16px;background:{{ b.bg }}"></div></sc-for>
+          </div>
+          <div style="position:absolute;inset:0;background:rgba(45,41,31,.5);display:flex;align-items:flex-end">
+            <div style="background:#fff;width:100%;border-radius:28px 28px 0 0;padding:24px 20px 28px;display:flex;flex-direction:column;gap:12px">
+              <div style="font:800 24px/1.1 'Baloo 2'">Set a PIN first</div>
+              <div style="font:600 14px/1.5 Nunito;color:#4A453B;text-wrap:pretty">Before handing over to your child, create a 4-digit PIN in Settings. You'll use it to come back to Parent view.</div>
+              <div style="height:54px;border-radius:16px;background:#DF552E;color:#fff;font:800 16px Nunito;display:flex;align-items:center;justify-content:center;margin-top:6px">Go to Settings</div>
+              <div style="height:48px;font:800 15px Nunito;color:#595959;display:flex;align-items:center;justify-content:center">Not now</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="font:500 13px 'IBM Plex Mono',monospace;color:#595959">C2 · Child home</div>
+        <div style="width:360px;height:740px;border-radius:40px;border:8px solid #2D291F;background:#BBE9EB;overflow:hidden;display:flex;flex-direction:column">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:40px 14px 8px">
+            <span style="padding:7px 12px;border-radius:999px;background:#fff;font:800 12px Nunito;color:#595959">Free</span>
+            <div style="display:flex;padding:4px;border-radius:999px;background:#fff"><span style="padding:9px 12px;font:800 13px Nunito;color:#595959">Parent</span><span style="padding:9px 14px;border-radius:999px;background:#0B6E73;color:#fff;font:800 13px Nunito">Child</span></div>
+          </div>
+          <div style="padding:8px 16px 0;display:flex;flex-direction:column;gap:14px;flex:1;overflow:hidden">
+            <div style="font:800 34px/1 'Baloo 2';color:#0B4F53">Pick a story!</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+              <sc-for list="{{ books }}" as="b" hint-placeholder-count="4">
+                <div style="display:flex;flex-direction:column;gap:6px;background:#fff;border-radius:24px;padding:8px 8px 10px">
+                  <div style="height:178px;border-radius:18px;background:{{ b.bg }};position:relative;padding:34px 10px 10px;display:flex;align-items:flex-end;overflow:hidden">
+                    <span style="position:absolute;top:8px;left:8px;padding:3px 8px;border-radius:999px;background:#fff;font:800 11px Nunito">{{ b.age }}</span>
+                    <div style="font:800 18px/1.05 'Baloo 2';color:{{ b.ink }};padding-right:34px">{{ b.title }}</div>
+                    <sc-if value="{{ b.locked }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;right:8px;bottom:8px;width:36px;height:36px;border-radius:50%;background:#2D291F;display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 16 16"><rect x="3" y="7" width="10" height="8" rx="2" fill="#fff"></rect><path d="M5 7V5a3 3 0 0 1 6 0v2" stroke="#fff" stroke-width="2" fill="none"></path></svg></span></sc-if>
+                    <sc-if value="{{ b.free }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;right:8px;bottom:8px;padding:4px 9px;border-radius:999px;background:#0B6E73;color:#fff;font:800 11px Nunito">Free</span></sc-if>
+                  </div>
+                  <div style="font:800 14px/1.15 'Baloo 2';padding:0 4px">{{ b.title }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;background:#fff;padding:10px 14px 22px;border-radius:28px 28px 0 0">
+            <div style="height:56px;border-radius:18px;background:#FFCC08;display:flex;align-items:center;justify-content:center;gap:8px;font:800 16px 'Baloo 2'"><span style="width:22px;height:22px;border-radius:7px;background:#2D291F"></span>Home</div>
+            <div style="height:56px;border-radius:18px;display:flex;align-items:center;justify-content:center;gap:8px;font:800 16px 'Baloo 2';color:#595959"><svg width="22" height="22" viewBox="0 0 22 22" style="flex:none"><polygon points="11,2.5 20.5,19.5 1.5,19.5" fill="none" stroke="#595959" stroke-width="2.5" stroke-linejoin="round"></polygon></svg>My Book</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="font:500 13px 'IBM Plex Mono',monospace;color:#595959">C3 · Locked book tapped</div>
+        <div style="width:360px;height:740px;border-radius:40px;border:8px solid #2D291F;background:#BBE9EB;overflow:hidden;display:flex;flex-direction:column;position:relative">
+          <div style="padding:100px 16px 0;display:grid;grid-template-columns:1fr 1fr;gap:14px">
+            <sc-for list="{{ books }}" as="b" hint-placeholder-count="4"><div style="height:200px;border-radius:24px;background:#fff;padding:8px"><div style="height:100%;border-radius:18px;background:{{ b.bg }}"></div></div></sc-for>
+          </div>
+          <div style="position:absolute;inset:0;background:rgba(11,79,83,.55);display:flex;align-items:center;justify-content:center;padding:24px">
+            <div style="background:#fff;border-radius:32px;padding:28px 22px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;width:100%">
+              <div style="width:96px;height:96px;border-radius:50%;background:#FFCC08;display:flex;align-items:center;justify-content:center"><svg width="44" height="44" viewBox="0 0 16 16"><rect x="3" y="7" width="10" height="8" rx="2" fill="#2D291F"></rect><path d="M5 7V5a3 3 0 0 1 6 0v2" stroke="#2D291F" stroke-width="1.8" fill="none"></path></svg></div>
+              <div style="font:800 28px/1.05 'Baloo 2';color:#0B4F53">This book is still locked</div>
+              <div style="font:700 17px/1.4 Nunito;color:#4A453B">Ask your parent to unlock this book.</div>
+              <div style="width:100%;height:60px;border-radius:20px;background:#0B6E73;color:#fff;font:800 20px 'Baloo 2';display:flex;align-items:center;justify-content:center;margin-top:6px">Okay!</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="font:500 13px 'IBM Plex Mono',monospace;color:#595959">C4 · PIN to return to Parent view</div>
+        <div style="width:360px;height:740px;border-radius:40px;border:8px solid #2D291F;background:#fff;overflow:hidden;display:flex;flex-direction:column;padding:48px 20px 28px;gap:18px">
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="width:44px;height:44px;border-radius:50%;background:#F6F3EC;display:flex;align-items:center;justify-content:center;font:800 18px Nunito">✕</span><span style="padding:6px 10px;border-radius:999px;background:#FFF2CC;font:800 12px Nunito">Grown-ups only</span></div>
+          <div style="display:flex;flex-direction:column;gap:4px;text-align:center"><div style="font:800 26px/1.1 'Baloo 2'">Enter parent PIN</div><div style="font:600 14px Nunito;color:#595959">to switch to Parent view</div></div>
+          <div style="display:flex;gap:14px;justify-content:center"><span style="width:18px;height:18px;border-radius:50%;background:#DF552E"></span><span style="width:18px;height:18px;border-radius:50%;background:#DF552E"></span><span style="width:18px;height:18px;border-radius:50%;background:#DF552E"></span><span style="width:18px;height:18px;border-radius:50%;background:#DF552E"></span></div>
+          <div style="font:700 13px Nunito;color:#C2410C;background:#FFDCCF;padding:8px 12px;border-radius:12px;text-align:center">Wrong PIN. 3 tries left before a 1-minute lock.</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+            <sc-for list="{{ keypad }}" as="k" hint-placeholder-count="12"><div style="height:58px;border-radius:16px;background:{{ k.bg }};display:flex;align-items:center;justify-content:center;font:700 24px Nunito">{{ k.v }}</div></sc-for>
+          </div>
+          <div style="text-align:center;font:800 15px Nunito;color:#DF552E;margin-top:auto">Forgot PIN? Use account password</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="font:500 13px 'IBM Plex Mono',monospace;color:#595959">C5 · Child My Book</div>
+        <div style="width:360px;height:740px;border-radius:40px;border:8px solid #2D291F;background:#BBE9EB;overflow:hidden;display:flex;flex-direction:column">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:40px 14px 8px">
+            <span style="padding:7px 12px;border-radius:999px;background:#fff;font:800 12px Nunito;color:#595959">Free</span>
+            <div style="display:flex;padding:4px;border-radius:999px;background:#fff"><span style="padding:9px 12px;font:800 13px Nunito;color:#595959">Parent</span><span style="padding:9px 14px;border-radius:999px;background:#0B6E73;color:#fff;font:800 13px Nunito">Child</span></div>
+          </div>
+          <div style="padding:8px 16px 0;display:flex;flex-direction:column;gap:14px;flex:1">
+            <div style="font:800 34px/1 'Baloo 2';color:#0B4F53">My books</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+              <sc-for list="{{ myBooks }}" as="b" hint-placeholder-count="2">
+                <div style="display:flex;flex-direction:column;gap:6px;background:#fff;border-radius:24px;padding:8px 8px 10px">
+                  <div style="height:178px;border-radius:18px;background:{{ b.bg }};position:relative;padding:34px 10px 10px;display:flex;align-items:flex-end"><span style="position:absolute;top:8px;left:8px;padding:3px 8px;border-radius:999px;background:#fff;font:800 11px Nunito">{{ b.age }}</span><div style="font:800 18px/1.05 'Baloo 2';color:{{ b.ink }}">{{ b.title }}</div></div>
+                  <div style="font:800 14px/1.15 'Baloo 2';padding:0 4px">{{ b.title }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;background:#fff;padding:10px 14px 22px;border-radius:28px 28px 0 0">
+            <div style="height:56px;border-radius:18px;display:flex;align-items:center;justify-content:center;gap:8px;font:800 16px 'Baloo 2';color:#595959"><span style="width:22px;height:22px;border-radius:7px;border:2.5px solid #595959"></span>Home</div>
+            <div style="height:56px;border-radius:18px;background:#FFCC08;display:flex;align-items:center;justify-content:center;gap:8px;font:800 16px 'Baloo 2'"><svg width="22" height="22" viewBox="0 0 22 22" style="flex:none"><polygon points="11,2.5 20.5,19.5 1.5,19.5" fill="#2D291F" stroke="#2D291F" stroke-width="2.5" stroke-linejoin="round"></polygon></svg>My Book</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW D: Book viewer -->
+  <div style="display:flex;flex-direction:column;gap:20px">
+    <h2 style="margin:0;font:700 28px 'Baloo 2';color:#2D291F">Book viewer · both views · day & night</h2>
+    <div style="display:flex;gap:40px;align-items:flex-start">
+
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="font:500 13px 'IBM Plex Mono',monospace;color:#595959">D1 · Day · phone portrait</div>
+        <div style="width:360px;height:740px;border-radius:40px;border:8px solid #2D291F;background:#FFFCF3;overflow:hidden;display:flex;flex-direction:column">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:40px 14px 10px">
+            <span style="width:48px;height:48px;border-radius:50%;background:#fff;border:2px solid #EDE3CB;display:flex;align-items:center;justify-content:center;font:800 18px Nunito">✕</span>
+            <span style="font:700 14px Nunito;color:#595959">Page 3 of 12</span>
+            <div style="display:flex;padding:4px;border-radius:999px;background:#FFF2CC"><span style="width:40px;height:40px;border-radius:50%;background:#FFCC08;display:flex;align-items:center;justify-content:center;font:700 12px Nunito">Day</span><span style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;font:700 12px Nunito;color:#595959">Night</span></div>
+          </div>
+          <div style="flex:1;padding:8px 18px;display:flex;flex-direction:column;gap:18px">
+            <div style="flex:1;border-radius:24px;background:repeating-linear-gradient(135deg,#FFF2CC 0 14px,#FFEFC0 14px 28px);display:flex;align-items:center;justify-content:center;font:500 12px 'IBM Plex Mono',monospace;color:#8A7A3A">EPUB page illustration</div>
+            <div style="font:700 22px/1.4 'Baloo 2';color:#2D291F;text-wrap:pretty">Splash! Kiko jumped into the biggest puddle on the whole pond.</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px 18px 26px">
+            <div style="height:60px;border-radius:20px;background:#fff;border:2px solid #EDE3CB;font:800 18px 'Baloo 2';display:flex;align-items:center;justify-content:center">‹ Back</div>
+            <div style="height:60px;border-radius:20px;background:#DF552E;color:#fff;font:800 18px 'Baloo 2';display:flex;align-items:center;justify-content:center">Next ›</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="font:500 13px 'IBM Plex Mono',monospace;color:#595959">D2 · Night · tablet landscape</div>
+        <div style="width:1024px;height:740px;border-radius:36px;border:10px solid #2D291F;background:#1E1C2A;overflow:hidden;display:flex;flex-direction:column">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 28px">
+            <span style="width:52px;height:52px;border-radius:50%;background:#2C2A3D;display:flex;align-items:center;justify-content:center;font:800 18px Nunito;color:#F1E5FF">✕</span>
+            <span style="font:700 15px Nunito;color:#B9B0CC">The Sleepy Moon · Page 7 of 10</span>
+            <div style="display:flex;padding:4px;border-radius:999px;background:#2C2A3D"><span style="width:48px;height:44px;display:flex;align-items:center;justify-content:center;font:700 13px Nunito;color:#B9B0CC">Day</span><span style="width:56px;height:44px;border-radius:999px;background:#C0ADD6;display:flex;align-items:center;justify-content:center;font:800 13px Nunito;color:#1E1C2A">Night</span></div>
+          </div>
+          <div style="flex:1;display:grid;grid-template-columns:1.2fr 1fr;gap:32px;padding:8px 28px 8px 28px;align-items:center">
+            <div style="height:100%;border-radius:28px;background:repeating-linear-gradient(135deg,#2C2A3D 0 14px,#302E43 14px 28px);display:flex;align-items:center;justify-content:center;font:500 13px 'IBM Plex Mono',monospace;color:#8C84A3">EPUB page illustration</div>
+            <div style="font:700 32px/1.4 'Baloo 2';color:#F4EEDC;text-wrap:pretty">The moon yawned a big, silver yawn. “Goodnight, stars,” she whispered. “Goodnight, sleepy town.”</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:18px 28px 26px">
+            <div style="width:180px;height:64px;border-radius:22px;background:#2C2A3D;color:#F1E5FF;font:800 20px 'Baloo 2';display:flex;align-items:center;justify-content:center">‹ Back</div>
+            <div style="width:180px;height:64px;border-radius:22px;background:#FFCC08;color:#1E1C2A;font:800 20px 'Baloo 2';display:flex;align-items:center;justify-content:center">Next ›</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="admin" data-screen-label="App 2 · Book Management" style="width:max-content;min-width:100%;padding:72px 72px 96px;background:#ECEDEF;display:flex;flex-direction:column;gap:56px;font-family:'IBM Plex Sans',sans-serif;border-top:12px solid #2D291F">
+  <div style="display:flex;align-items:flex-end;gap:32px;border-bottom:1px solid #C9CBD0;padding-bottom:28px">
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="display:flex;gap:10px;align-items:center">
+        <span style="font:600 14px 'IBM Plex Mono',monospace;background:#2D291F;color:#fff;padding:6px 12px;border-radius:4px">APP 02</span>
+        <span style="font:600 14px 'IBM Plex Mono',monospace;color:#4D5156">Admin back office · desktop web</span>
+      </div>
+      <h1 style="margin:0;font:600 56px/1 'IBM Plex Sans',sans-serif;color:#1F2124;letter-spacing:-1px">MainStory Book Management</h1>
+    </div>
+    <div style="margin-left:auto;max-width:360px;font:400 14px/1.5 'IBM Plex Sans';color:#4D5156">Dense, neutral, table-first. Brand orange is kept for primary actions only so admins never confuse it with the family app.</div>
+  </div>
+
+  <div style="display:flex;gap:48px;align-items:flex-start;flex-wrap:wrap">
+
+    <div style="display:flex;flex-direction:column;gap:10px"><div style="font:500 13px 'IBM Plex Mono',monospace;color:#4D5156">E1 · Admin login</div>
+      <div style="width:1280px;height:800px;border-radius:10px;overflow:hidden;background:#F6F6F7;border:1px solid #C9CBD0;display:flex;flex-direction:column">
+        <div style="height:36px;background:#DDDFE2;display:flex;align-items:center;gap:8px;padding:0 14px"><span style="width:11px;height:11px;border-radius:50%;background:#B9BCC1"></span><span style="width:11px;height:11px;border-radius:50%;background:#B9BCC1"></span><span style="width:11px;height:11px;border-radius:50%;background:#B9BCC1"></span><span style="margin-left:16px;font:400 12px 'IBM Plex Mono';color:#4D5156">admin.mainstory.id/login</span></div>
+        <div style="flex:1;display:flex;align-items:center;justify-content:center">
+          <div style="width:400px;background:#fff;border:1px solid #DDDFE2;border-radius:8px;padding:32px;display:flex;flex-direction:column;gap:18px">
+            <div style="display:flex;align-items:center;gap:10px"><span style="width:28px;height:28px;border-radius:6px;background:#F05A25"></span><span style="font:600 16px 'IBM Plex Sans'">MainStory · Book Management</span></div>
+            <div style="font:600 22px 'IBM Plex Sans'">Sign in</div>
+            <label style="display:flex;flex-direction:column;gap:6px;font:500 13px 'IBM Plex Sans';color:#4D5156">Email<div style="height:40px;border:1px solid #C9CBD0;border-radius:6px;padding:0 12px;display:flex;align-items:center;font:400 14px 'IBM Plex Sans';color:#1F2124">admin@mainstory.id</div></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font:500 13px 'IBM Plex Sans';color:#4D5156">Password<div style="height:40px;border:1px solid #C9CBD0;border-radius:6px;padding:0 12px;display:flex;align-items:center;font:400 14px 'IBM Plex Sans';color:#1F2124;letter-spacing:3px">••••••••••</div></label>
+            <div style="height:40px;border-radius:6px;background:#DF552E;color:#fff;font:600 14px 'IBM Plex Sans';display:flex;align-items:center;justify-content:center">Sign in</div>
+            <div style="font:400 12px 'IBM Plex Sans';color:#6B6F75">Admin accounts only. Parent accounts are refused.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px"><div style="font:500 13px 'IBM Plex Mono',monospace;color:#4D5156">E2 · Master book list</div>
+      <div style="width:1280px;height:800px;border-radius:10px;overflow:hidden;background:#F6F6F7;border:1px solid #C9CBD0;display:flex">
+        <div style="width:232px;background:#24221C;color:#E6E2D8;display:flex;flex-direction:column;padding:20px 14px;gap:4px">
+          <div style="display:flex;align-items:center;gap:10px;padding:0 8px 22px"><span style="width:26px;height:26px;border-radius:6px;background:#F05A25"></span><div style="display:flex;flex-direction:column"><span style="font:600 14px 'IBM Plex Sans'">MainStory</span><span style="font:400 11px 'IBM Plex Mono';color:#A9A496">Book Management</span></div></div>
+          <div style="height:38px;border-radius:6px;background:#3A372E;display:flex;align-items:center;padding:0 10px;gap:10px;font:500 14px 'IBM Plex Sans';color:#fff"><span style="width:3px;height:18px;background:#F05A25;border-radius:2px"></span>Master book</div>
+          <div style="height:38px;border-radius:6px;display:flex;align-items:center;padding:0 10px 0 23px;font:500 14px 'IBM Plex Sans';color:#C7C2B6">Subscription</div>
+          <div style="margin-top:auto;border-top:1px solid #3A372E;padding:14px 8px 0;display:flex;justify-content:space-between;font:400 13px 'IBM Plex Sans';color:#A9A496"><span>admin@mainstory.id</span><span style="color:#FFB89C">Log out</span></div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;padding:28px 32px;gap:20px;min-width:0">
+          <div style="display:flex;align-items:center;justify-content:space-between"><div style="display:flex;flex-direction:column;gap:2px"><div style="font:600 24px 'IBM Plex Sans'">Master book</div><div style="font:400 13px 'IBM Plex Sans';color:#6B6F75">Only Published books appear in StoryBook by MainStory.</div></div><div style="height:38px;padding:0 16px;border-radius:6px;background:#DF552E;color:#fff;font:600 14px 'IBM Plex Sans';display:flex;align-items:center">+ Add book</div></div>
+          <div style="display:flex;gap:10px">
+            <div style="width:320px;height:38px;border:1px solid #C9CBD0;border-radius:6px;background:#fff;padding:0 12px;display:flex;align-items:center;font:400 14px 'IBM Plex Sans';color:#8A8E94">Search by title</div>
+            <div style="display:flex;border:1px solid #C9CBD0;border-radius:6px;background:#fff;overflow:hidden;font:500 13px 'IBM Plex Sans'"><span style="padding:0 14px;display:flex;align-items:center;background:#1F2124;color:#fff">All</span><span style="padding:0 14px;display:flex;align-items:center;border-left:1px solid #C9CBD0">Published</span><span style="padding:0 14px;display:flex;align-items:center;border-left:1px solid #C9CBD0">Draft</span></div>
+          </div>
+          <div style="background:#fff;border:1px solid #DDDFE2;border-radius:8px;overflow:hidden">
+            <div style="display:grid;grid-template-columns:56px 2fr 1.3fr 70px 110px 110px 110px 110px;gap:12px;padding:10px 16px;background:#F6F6F7;border-bottom:1px solid #DDDFE2;font:600 12px 'IBM Plex Mono';color:#6B6F75;text-transform:uppercase"><span>Cover</span><span>Title</span><span>Author</span><span>Age</span><span>Price</span><span>Status</span><span>Updated</span><span style="text-align:right">Actions</span></div>
+            <sc-for list="{{ adminBooks }}" as="b" hint-placeholder-count="7">
+              <div style="display:grid;grid-template-columns:56px 2fr 1.3fr 70px 110px 110px 110px 110px;gap:12px;padding:10px 16px;border-bottom:1px solid #EEEFF1;align-items:center;font:400 14px 'IBM Plex Sans'">
+                <span style="width:36px;height:48px;border-radius:4px;background:{{ b.bg }}"></span>
+                <span style="font-weight:500">{{ b.title }}</span>
+                <span style="color:#4D5156">{{ b.author }}</span>
+                <span style="font-family:'IBM Plex Mono'">{{ b.age }}</span>
+                <span style="font-family:'IBM Plex Mono'">{{ b.adminPrice }}</span>
+                <span><span style="padding:3px 8px;border-radius:4px;background:{{ b.stBg }};color:{{ b.stInk }};font:500 12px 'IBM Plex Sans'">{{ b.status }}</span></span>
+                <span style="color:#6B6F75;font-size:13px">{{ b.updated }}</span>
+                <span style="display:flex;justify-content:flex-end;gap:14px;font:500 13px 'IBM Plex Sans'"><span style="color:#1F2124">Edit</span><span style="color:#B42318">Delete</span></span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px"><div style="font:500 13px 'IBM Plex Mono',monospace;color:#4D5156">E3 · Add / edit book · with validation</div>
+      <div style="width:1280px;height:800px;border-radius:10px;overflow:hidden;background:#F6F6F7;border:1px solid #C9CBD0;display:flex">
+        <div style="width:232px;background:#24221C;color:#E6E2D8;display:flex;flex-direction:column;padding:20px 14px;gap:4px">
+          <div style="display:flex;align-items:center;gap:10px;padding:0 8px 22px"><span style="width:26px;height:26px;border-radius:6px;background:#F05A25"></span><div style="display:flex;flex-direction:column"><span style="font:600 14px 'IBM Plex Sans'">MainStory</span><span style="font:400 11px 'IBM Plex Mono';color:#A9A496">Book Management</span></div></div>
+          <div style="height:38px;border-radius:6px;background:#3A372E;display:flex;align-items:center;padding:0 10px;gap:10px;font:500 14px 'IBM Plex Sans';color:#fff"><span style="width:3px;height:18px;background:#F05A25;border-radius:2px"></span>Master book</div>
+          <div style="height:38px;border-radius:6px;display:flex;align-items:center;padding:0 10px 0 23px;font:500 14px 'IBM Plex Sans';color:#C7C2B6">Subscription</div>
+          <div style="margin-top:auto;border-top:1px solid #3A372E;padding:14px 8px 0;display:flex;justify-content:space-between;font:400 13px 'IBM Plex Sans';color:#A9A496"><span>admin@mainstory.id</span><span style="color:#FFB89C">Log out</span></div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;padding:28px 32px;gap:18px;min-width:0">
+          <div style="display:flex;align-items:center;justify-content:space-between"><div style="display:flex;flex-direction:column;gap:2px"><div style="font:400 13px 'IBM Plex Sans';color:#6B6F75">Master book / Add book</div><div style="font:600 24px 'IBM Plex Sans'">Add book</div></div><div style="display:flex;gap:10px"><span style="height:38px;padding:0 16px;border-radius:6px;border:1px solid #C9CBD0;background:#fff;font:500 14px 'IBM Plex Sans';display:flex;align-items:center">Cancel</span><span style="height:38px;padding:0 16px;border-radius:6px;background:#DF552E;color:#fff;font:600 14px 'IBM Plex Sans';display:flex;align-items:center">Save book</span></div></div>
+          <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:20px;flex:1;min-height:0">
+            <div style="background:#fff;border:1px solid #DDDFE2;border-radius:8px;padding:22px;display:flex;flex-direction:column;gap:16px">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+                <label style="display:flex;flex-direction:column;gap:6px;font:500 13px 'IBM Plex Sans';color:#4D5156">Title *<div style="height:38px;border:1px solid #C9CBD0;border-radius:6px;padding:0 12px;display:flex;align-items:center;font:400 14px 'IBM Plex Sans';color:#1F2124">Ollie and the Big Rain</div></label>
+                <label style="display:flex;flex-direction:column;gap:6px;font:500 13px 'IBM Plex Sans';color:#4D5156">Author *<div style="height:38px;border:1px solid #C9CBD0;border-radius:6px;padding:0 12px;display:flex;align-items:center;font:400 14px 'IBM Plex Sans';color:#1F2124">Rizky Hidayat</div></label>
+              </div>
+              <label style="display:flex;flex-direction:column;gap:6px;font:500 13px 'IBM Plex Sans';color:#4D5156">Description *<div style="height:84px;border:1px solid #C9CBD0;border-radius:6px;padding:10px 12px;font:400 14px/1.5 'IBM Plex Sans';color:#1F2124">Ollie the frog has never seen a storm. When the rain comes, he discovers the pond is full of new friends.</div></label>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <div style="font:500 13px 'IBM Plex Sans';color:#4D5156">Age range *</div>
+                <div style="display:flex;gap:14px;align-items:center">
+                  <div style="display:flex;border:1px solid #C9CBD0;border-radius:6px;overflow:hidden;font:500 13px 'IBM Plex Sans'"><span style="height:38px;padding:0 14px;display:flex;align-items:center;background:#1F2124;color:#fff">Range</span><span style="height:38px;padding:0 14px;display:flex;align-items:center;border-left:1px solid #C9CBD0;background:#fff">Number (3+)</span></div>
+                  <div style="width:70px;height:38px;border:1px solid #B42318;border-radius:6px;display:flex;align-items:center;justify-content:center;font:400 14px 'IBM Plex Mono'">5</div>
+                  <span style="color:#6B6F75">–</span>
+                  <div style="width:70px;height:38px;border:1px solid #B42318;border-radius:6px;display:flex;align-items:center;justify-content:center;font:400 14px 'IBM Plex Mono'">3</div>
+                </div>
+                <div style="font:400 12px 'IBM Plex Sans';color:#B42318">Min age must be lower than max age. Use whole numbers.</div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+                <label style="display:flex;flex-direction:column;gap:6px;font:500 13px 'IBM Plex Sans';color:#4D5156">Price (IDR) *<div style="height:38px;border:1px solid #C9CBD0;border-radius:6px;padding:0 12px;display:flex;align-items:center;gap:8px;font:400 14px 'IBM Plex Mono';color:#1F2124"><span style="color:#8A8E94">Rp</span>32000</div><span style="font:400 12px 'IBM Plex Sans';color:#6B6F75">0 = Free book</span></label>
+                <div style="display:flex;flex-direction:column;gap:6px;font:500 13px 'IBM Plex Sans';color:#4D5156">Publish status *
+                  <div style="display:flex;gap:18px;height:38px;align-items:center;font:400 14px 'IBM Plex Sans';color:#1F2124">
+                    <span style="display:flex;align-items:center;gap:8px"><span style="width:16px;height:16px;border-radius:50%;border:5px solid #DF552E"></span>Draft</span>
+                    <span style="display:flex;align-items:center;gap:8px"><span style="width:16px;height:16px;border-radius:50%;border:1px solid #8A8E94"></span>Published</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:16px">
+              <div style="background:#fff;border:1px solid #DDDFE2;border-radius:8px;padding:18px;display:flex;flex-direction:column;gap:10px">
+                <div style="font:500 13px 'IBM Plex Sans';color:#4D5156">Cover image * <span style="font-family:'IBM Plex Mono';color:#8A8E94">.jpg .jpeg .png</span></div>
+                <div style="display:flex;gap:14px;align-items:center">
+                  <div style="width:90px;height:120px;border-radius:6px;background:#BBE9EB;flex:none"></div>
+                  <div style="display:flex;flex-direction:column;gap:4px;font:400 13px 'IBM Plex Sans'"><span style="font-family:'IBM Plex Mono'">ollie-cover.png</span><span style="color:#6B6F75">412 KB</span><span style="color:#1F2124;text-decoration:underline">Replace</span></div>
+                </div>
+              </div>
+              <div style="background:#fff;border:1px solid #DDDFE2;border-radius:8px;padding:18px;display:flex;flex-direction:column;gap:10px">
+                <div style="font:500 13px 'IBM Plex Sans';color:#4D5156">Book file * <span style="font-family:'IBM Plex Mono';color:#8A8E94">.epub only</span></div>
+                <div style="height:92px;border:1.5px dashed #B42318;border-radius:6px;background:#FEF3F2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font:400 13px 'IBM Plex Sans'"><span style="font-family:'IBM Plex Mono'">ollie-final.pdf</span><span style="color:#B42318">Only .epub files are accepted.</span></div>
+                <div style="font:400 12px 'IBM Plex Sans';color:#6B6F75">Drop an .epub here or browse.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px"><div style="font:500 13px 'IBM Plex Mono',monospace;color:#4D5156">E4 · Subscription configuration</div>
+      <div style="width:1280px;height:800px;border-radius:10px;overflow:hidden;background:#F6F6F7;border:1px solid #C9CBD0;display:flex;position:relative">
+        <div style="width:232px;background:#24221C;color:#E6E2D8;display:flex;flex-direction:column;padding:20px 14px;gap:4px">
+          <div style="display:flex;align-items:center;gap:10px;padding:0 8px 22px"><span style="width:26px;height:26px;border-radius:6px;background:#F05A25"></span><div style="display:flex;flex-direction:column"><span style="font:600 14px 'IBM Plex Sans'">MainStory</span><span style="font:400 11px 'IBM Plex Mono';color:#A9A496">Book Management</span></div></div>
+          <div style="height:38px;border-radius:6px;display:flex;align-items:center;padding:0 10px 0 23px;font:500 14px 'IBM Plex Sans';color:#C7C2B6">Master book</div>
+          <div style="height:38px;border-radius:6px;background:#3A372E;display:flex;align-items:center;padding:0 10px;gap:10px;font:500 14px 'IBM Plex Sans';color:#fff"><span style="width:3px;height:18px;background:#F05A25;border-radius:2px"></span>Subscription</div>
+          <div style="margin-top:auto;border-top:1px solid #3A372E;padding:14px 8px 0;display:flex;justify-content:space-between;font:400 13px 'IBM Plex Sans';color:#A9A496"><span>admin@mainstory.id</span><span style="color:#FFB89C">Log out</span></div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;padding:28px 32px;gap:20px">
+          <div style="display:flex;align-items:center;justify-content:space-between"><div style="display:flex;flex-direction:column;gap:2px"><div style="font:600 24px 'IBM Plex Sans'">Subscription configuration</div><div style="font:400 13px 'IBM Plex Sans';color:#6B6F75">Monthly plan. Changes apply to new subscriptions only.</div></div><span style="height:38px;padding:0 16px;border-radius:6px;background:#DF552E;color:#fff;font:600 14px 'IBM Plex Sans';display:flex;align-items:center">Save changes</span></div>
+          <div style="display:grid;grid-template-columns:1fr 380px;gap:24px">
+            <div style="background:#fff;border:1px solid #DDDFE2;border-radius:8px;padding:22px;display:flex;flex-direction:column;gap:18px">
+              <label style="display:flex;flex-direction:column;gap:6px;font:500 13px 'IBM Plex Sans';color:#4D5156;width:280px">Monthly price (IDR) *<div style="height:38px;border:1px solid #C9CBD0;border-radius:6px;padding:0 12px;display:flex;align-items:center;gap:8px;font:400 14px 'IBM Plex Mono';color:#1F2124"><span style="color:#8A8E94">Rp</span>49000</div><span style="font:400 12px 'IBM Plex Sans';color:#6B6F75">Whole number above 0</span></label>
+              <label style="display:flex;flex-direction:column;gap:6px;font:500 13px 'IBM Plex Sans';color:#4D5156">Benefits (one per line) *<div style="height:120px;border:1px solid #C9CBD0;border-radius:6px;padding:10px 12px;font:400 14px/1.7 'IBM Plex Sans';color:#1F2124;display:flex;flex-direction:column"><sc-for list="{{ benefits }}" as="t" hint-placeholder-count="3"><span>{{ t }}</span></sc-for></div></label>
+              <div style="display:flex;gap:10px;align-items:flex-start;background:#F6F6F7;border:1px solid #DDDFE2;border-radius:6px;padding:12px 14px;font:400 13px/1.5 'IBM Plex Sans';color:#4D5156"><span style="font:600 12px 'IBM Plex Mono';color:#1F2124">NOTE</span>214 active subscribers keep their current price (Rp 45.000) until their period expires.</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="font:600 12px 'IBM Plex Mono';color:#6B6F75;text-transform:uppercase">Preview in StoryBook</div>
+              <div style="border-radius:24px;overflow:hidden;background:#fff;border:1px solid #DDDFE2;font-family:Nunito">
+                <div style="background:#FFCC08;padding:22px 20px;display:flex;flex-direction:column;gap:8px"><div style="font:800 24px/1 'Baloo 2';color:#2D291F">Read every book in the library</div><div style="display:flex;align-items:baseline;gap:6px"><span style="font:800 24px 'Baloo 2'">Rp 49.000</span><span style="font:700 13px Nunito">/ month</span></div></div>
+                <div style="padding:16px 20px;display:flex;flex-direction:column;gap:10px"><sc-for list="{{ benefits }}" as="t" hint-placeholder-count="3"><div style="display:flex;gap:10px;align-items:center;font:700 14px Nunito"><span style="width:22px;height:22px;border-radius:50%;background:#BBE9EB;color:#0B6E73;display:flex;align-items:center;justify-content:center;font:800 12px Nunito;flex:none">✓</span>{{ t }}</div></sc-for></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px"><div style="font:500 13px 'IBM Plex Mono',monospace;color:#4D5156">E5 · Delete confirmation (soft delete)</div>
+      <div style="width:480px;background:#fff;border:1px solid #C9CBD0;border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:14px;box-shadow:0 12px 32px rgba(31,33,36,.12)">
+        <div style="font:600 18px 'IBM Plex Sans'">Delete “Bunny's Lost Hat”?</div>
+        <div style="font:400 14px/1.6 'IBM Plex Sans';color:#4D5156">The book will be hidden from the StoryBook showcase. 38 families who bought it keep access in My Book, and order history stays intact.</div>
+        <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:6px"><span style="height:38px;padding:0 16px;border-radius:6px;border:1px solid #C9CBD0;font:500 14px 'IBM Plex Sans';display:flex;align-items:center">Cancel</span><span style="height:38px;padding:0 16px;border-radius:6px;background:#B42318;color:#fff;font:600 14px 'IBM Plex Sans';display:flex;align-items:center">Delete book</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const fmt = n => 'Rp ' + n.toLocaleString('id-ID');
+    const raw = [
+      { title: 'The Sleepy Moon', author: 'Rani Putri', age: '1–3', price: 0, bg: '#BBE9EB', ink: '#0B4F53', s: 'free', st: 'Published', up: '12 Nov 2026' },
+      { title: 'Kiko the Little Duck', author: 'Dimas Arya', age: '1–3', price: 29000, bg: '#FFCC08', ink: '#5A4500', s: 'locked', st: 'Published', up: '10 Nov 2026' },
+      { title: 'Rainbow Garden', author: 'Sari Wulandari', age: '3+', price: 35000, bg: '#FFDCCF', ink: '#8A2E12', s: 'owned', st: 'Published', up: '8 Nov 2026' },
+      { title: 'Bubbles Goes to School', author: 'Nadia Halim', age: '3–6', price: 32000, bg: '#F1E5FF', ink: '#4B3470', s: 'locked', st: 'Published', up: '5 Nov 2026' },
+      { title: 'Counting Stars', author: 'Bayu Pratama', age: '2–4', price: 0, bg: '#FFF2CC', ink: '#6B5300', s: 'free', st: 'Published', up: '2 Nov 2026' },
+      { title: "Mimi's Big Sneeze", author: 'Tika Anggraini', age: '3+', price: 27000, bg: '#C0ADD6', ink: '#3A2558', s: 'locked', st: 'Published', up: '28 Oct 2026' },
+    ];
+    const books = raw.map(b => ({
+      ...b, locked: b.s === 'locked', free: b.s === 'free',
+      priceLabel: b.s === 'free' ? 'Free' : b.s === 'owned' ? 'Owned' : fmt(b.price),
+      priceInk: b.s === 'locked' ? '#DF552E' : '#0B6E73',
+    }));
+    const adminBooks = [...raw, { title: 'Ollie and the Big Rain', author: 'Rizky Hidayat', age: '3–5', price: 32000, bg: '#BBE9EB', st: 'Draft', up: '15 Nov 2026' }]
+      .map(b => ({ ...b, status: b.st, updated: b.up, adminPrice: b.price ? fmt(b.price) : 'Free',
+        stBg: b.st === 'Published' ? '#E3F6F7' : '#F0F0F2', stInk: b.st === 'Published' ? '#0B5E63' : '#4D5156' }));
+    const myBooks = [
+      { title: 'Rainbow Garden', age: '3+', bg: '#FFDCCF', ink: '#8A2E12', date: '14 Nov 2026' },
+      { title: "Bunny's Lost Hat", age: '1–3', bg: '#FFF2CC', ink: '#6B5300', date: '2 Nov 2026' },
+    ];
+    const pill = s => ({ Paid: ['#BBE9EB', '#0B4F53'], Active: ['#BBE9EB', '#0B4F53'], Failed: ['#FFDCCF', '#9A3412'], Cancelled: ['#FFDCCF', '#9A3412'], Expired: ['#EFEDE8', '#595959'] }[s]);
+    const orders = [
+      { date: '14 Nov 2026 · 19:42', title: 'Rainbow Garden', price: 'Rp 35.000', status: 'Paid' },
+      { date: '14 Nov 2026 · 19:40', title: 'Rainbow Garden', price: 'Rp 35.000', status: 'Failed' },
+      { date: '2 Nov 2026 · 08:15', title: "Bunny's Lost Hat", price: 'Rp 30.000', status: 'Paid' },
+    ].map(o => ({ ...o, bg: pill(o.status)[0], ink: pill(o.status)[1] }));
+    const subs = [
+      { start: '16 Nov 2026', end: '16 Dec 2026', price: 'Rp 49.000', status: 'Active', type: 'Renewal' },
+      { start: '16 Oct 2026', end: '16 Nov 2026', price: 'Rp 49.000', status: 'Expired', type: 'New' },
+      { start: '3 Aug 2026', end: '3 Sep 2026', price: 'Rp 45.000', status: 'Cancelled', type: 'New' },
+    ].map(s => ({ ...s, bg: pill(s.status)[0], ink: pill(s.status)[1] }));
+    const keypad = ['1','2','3','4','5','6','7','8','9','','0','⌫'].map(v => ({ v, bg: v === '' ? 'transparent' : '#F6F3EC' }));
+    return {
+      books, adminBooks, myBooks, orders, subs, keypad,
+      benefits: ['Unlock every published book', 'New stories added every month', 'Cancel anytime'],
+      settingsLinks: [
+        { label: 'Parent PIN', meta: 'Set' },
+        { label: 'Subscription', meta: 'Free' },
+        { label: 'Order history', meta: '' },
+        { label: 'Subscription history', meta: '' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

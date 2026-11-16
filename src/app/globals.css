@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+/* Design tokens from docs/design (App 2 · Book Management). Use these, never raw hex. */
+@theme inline {
+  --font-sans: var(--font-plex-sans);
+  --font-mono: var(--font-plex-mono);
+  --font-kid: var(--font-nunito);
+  --font-kid-display: var(--font-baloo);
+
+  --text-2xs: 0.6875rem; /* 11px */
+  --text-small: 0.8125rem; /* 13px */
+  --text-title: 1.375rem; /* 22px */
+
+  /* Admin neutrals */
+  --color-canvas: #f6f6f7;
+  --color-surface: #ffffff;
+  --color-line: #dddfe2;
+  --color-line-strong: #c9cbd0;
+  --color-line-soft: #eeeff1;
+  --color-ink: #1f2124;
+  --color-ink-2: #4d5156;
+  --color-muted: #6b6f75;
+  --color-placeholder: #8a8e94;
+
+  /* Sidebar */
+  --color-nav: #24221c;
+  --color-nav-active: #3a372e;
+  --color-nav-text: #e6e2d8;
+  --color-nav-dim: #c7c2b6;
+  --color-nav-faint: #a9a496;
+  --color-nav-accent: #ffb89c;
+
+  /* Brand: primary actions only */
+  --color-brand: #df552e;
+  --color-brand-hover: #b8441f;
+  --color-brand-mark: #f05a25;
+
+  /* Status */
+  --color-danger: #b42318;
+  --color-danger-soft: #fef3f2;
+  --color-published: #0b5e63;
+  --color-published-soft: #e3f6f7;
+  --color-draft-soft: #f0f0f2;
+
+  /* StoryBook (family app) palette, used only in the subscription preview */
+  --color-sb-ink: #2d291f;
+  --color-sb-yellow: #ffcc08;
+  --color-sb-teal: #0b6e73;
+  --color-sb-teal-soft: #bbe9eb;
+  --color-sb-cream: #efede8;
+}
+
+body {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
