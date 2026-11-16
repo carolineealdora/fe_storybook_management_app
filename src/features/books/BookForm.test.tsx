@@ -1,4 +1,4 @@
-import { screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import type { AdminBook } from "@/lib/types";
@@ -9,6 +9,24 @@ URL.createObjectURL = vi.fn(() => "blob:preview");
 URL.revokeObjectURL = vi.fn();
 
 const file = (name: string) => new File(["x"], name);
+
+const storedBook: AdminBook = {
+  id: "b1",
+  title: "Counting Stars",
+  author: "Bayu Pratama",
+  description: "Count with me.",
+  age_type: "plus",
+  age_min: 2,
+  age_max: null,
+  age_label: "2+",
+  price: 0,
+  status: "published",
+  cover_url: "/api/v1/books/b1/cover",
+  epub_file_name: "stars.epub",
+  epub_size_bytes: 100,
+  created_at: "2026-11-02T00:00:00Z",
+  updated_at: "2026-11-02T00:00:00Z",
+};
 
 async function fillValidBook(user: ReturnType<typeof userEvent.setup>) {
   await user.type(screen.getByLabelText("Title *"), "Ollie and the Big Rain");
@@ -123,25 +141,8 @@ describe("BookForm", () => {
         new Response(JSON.stringify({ data: {} }), { status: 200 }),
       );
     vi.stubGlobal("fetch", fetchMock);
-    const book: AdminBook = {
-      id: "b1",
-      title: "Counting Stars",
-      author: "Bayu Pratama",
-      description: "Count with me.",
-      age_type: "plus",
-      age_min: 2,
-      age_max: null,
-      age_label: "2+",
-      price: 0,
-      status: "published",
-      cover_url: "/api/v1/books/b1/cover",
-      epub_file_name: "stars.epub",
-      epub_size_bytes: 100,
-      created_at: "2026-11-02T00:00:00Z",
-      updated_at: "2026-11-02T00:00:00Z",
-    };
     const user = userEvent.setup();
-    renderRoute(<BookForm book={book} />, "/books/b1/edit");
+    renderRoute(<BookForm book={storedBook} />, "/books/b1/edit");
 
     expect(
       screen.getByRole("heading", { name: "Edit book" }),
@@ -158,5 +159,46 @@ describe("BookForm", () => {
     expect(body.get("age_type")).toBe("plus");
     expect(body.has("cover")).toBe(false);
     expect(body.has("epub")).toBe(false);
+  });
+
+  it("keeps the picked cover when the file dialog is cancelled (review #4)", async () => {
+    const user = userEvent.setup();
+    renderRoute(<BookForm />, "/books/new");
+    await user.upload(
+      screen.getByLabelText(/Choose image/),
+      file("ollie-cover.png"),
+    );
+    fireEvent.change(screen.getByLabelText(/Replace/), {
+      target: { files: [] },
+    });
+    expect(screen.getByText("ollie-cover.png")).toBeInTheDocument();
+  });
+
+  it("puts the server's file-format error on the file that was sent (review #3)", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn((_url: string, init?: RequestInit) =>
+        Promise.resolve(
+          init?.method === "PUT"
+            ? new Response(
+                JSON.stringify({
+                  error: {
+                    code: "INVALID_FILE_FORMAT",
+                    message: "File content is not a valid image.",
+                  },
+                }),
+                { status: 400 },
+              )
+            : new Response("", { status: 404 }),
+        ),
+      ),
+    );
+    const user = userEvent.setup();
+    renderRoute(<BookForm book={storedBook} />, "/books/b1/edit");
+    await user.upload(screen.getByLabelText(/Replace/), file("fake.png"));
+    await user.click(screen.getByRole("button", { name: "Save book" }));
+
+    const error = await screen.findByText("File content is not a valid image.");
+    expect(error).toHaveAttribute("id", "cover-error");
   });
 });

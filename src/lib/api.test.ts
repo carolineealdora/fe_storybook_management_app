@@ -108,4 +108,48 @@ describe("apiRequest", () => {
       code: "SERVICE_UNAVAILABLE",
     });
   });
+
+  it("keeps the session when the refresh endpoint is down, and reports it (review #1)", async () => {
+    signedIn();
+    const toLogin = vi.fn();
+    setSessionEndHandler(toLogin);
+    vi.stubGlobal(
+      "fetch",
+      vi
+        .fn()
+        .mockResolvedValueOnce(expired())
+        .mockResolvedValueOnce(new Response("", { status: 503 })),
+    );
+
+    await expect(apiRequest("/admin/books")).rejects.toMatchObject({
+      code: "SERVICE_UNAVAILABLE",
+    });
+    expect(getSession()?.refreshToken).toBe("ref");
+    expect(toLogin).not.toHaveBeenCalled();
+  });
+
+  it("does not crash on a non-JSON refresh response (review #6)", async () => {
+    signedIn();
+    vi.stubGlobal(
+      "fetch",
+      vi
+        .fn()
+        .mockResolvedValueOnce(expired())
+        .mockResolvedValueOnce(new Response("<html>", { status: 200 })),
+    );
+    await expect(apiRequest("/admin/books")).rejects.toMatchObject({
+      code: "SERVICE_UNAVAILABLE",
+    });
+    expect(getSession()).not.toBeNull();
+  });
+
+  it("accepts a 2xx with an empty body (review #7)", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue(new Response("", { status: 200 })),
+    );
+    await expect(
+      apiRequest("/admin/books/b1", { method: "DELETE" }),
+    ).resolves.toBeUndefined();
+  });
 });

@@ -62,6 +62,7 @@ export class ApiError extends Error {
 export async function readEnvelope<T>(res: Response): Promise<T> {
   if (res.status === 204) return undefined as T;
   const body: unknown = await res.json().catch(() => null);
+  if (res.ok && body === null) return undefined as T; // 2xx with an empty body
   if (!res.ok) {
     const err = (body as ApiErrorBody | null)?.error;
     // A gateway error without the API's error body means the backend is unreachable.

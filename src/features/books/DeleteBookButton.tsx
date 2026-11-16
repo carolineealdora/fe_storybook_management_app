@@ -22,7 +22,9 @@ export function DeleteBookButton({
     setPending(true);
     setError(undefined);
     try {
-      await apiRequest(`/admin/books/${id}`, { method: "DELETE" });
+      await apiRequest(`/admin/books/${encodeURIComponent(id)}`, {
+        method: "DELETE",
+      });
     } catch (e) {
       // Already deleted elsewhere: the outcome the admin wanted, so just refresh.
       if (!(e instanceof ApiError && e.code === "BOOK_NOT_FOUND")) {

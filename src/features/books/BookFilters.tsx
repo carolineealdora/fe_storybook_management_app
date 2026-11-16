@@ -1,4 +1,4 @@
-import type { FormEvent } from "react";
+import { useRef, type FormEvent } from "react";
 import { useNavigate } from "react-router";
 import { SegmentedControl } from "@/components/ui/SegmentedControl";
 import type { BookStatus } from "@/lib/types";
@@ -21,6 +21,7 @@ interface BookFiltersProps {
 /** Filters live in the URL, so the filtered list survives reloads and links are shareable. */
 export function BookFilters({ search, status, busy }: BookFiltersProps) {
   const navigate = useNavigate();
+  const searchRef = useRef<HTMLInputElement>(null);
 
   function go(nextSearch: string, nextStatus: StatusFilter) {
     const params = new URLSearchParams();
@@ -46,6 +47,7 @@ export function BookFilters({ search, status, busy }: BookFiltersProps) {
         </label>
         <input
           key={search}
+          ref={searchRef}
           id="book-search"
           name="search"
           type="search"
@@ -59,7 +61,7 @@ export function BookFilters({ search, status, busy }: BookFiltersProps) {
         name="status"
         options={STATUS_OPTIONS}
         value={status}
-        onChange={(v) => go(search, v)}
+        onChange={(v) => go(searchRef.current?.value ?? search, v)}
       />
       {busy && (
         <span role="status" className="text-small text-muted">

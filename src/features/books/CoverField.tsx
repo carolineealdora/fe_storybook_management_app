@@ -74,7 +74,10 @@ export function CoverField({
               className="sr-only"
               aria-invalid={Boolean(error) || undefined}
               aria-describedby={error ? "cover-error" : undefined}
-              onChange={(e) => pick(e.target.files?.[0] ?? null)}
+              onChange={(e) => {
+                const next = e.target.files?.[0];
+                if (next) pick(next); // cancelled dialog: keep the current file
+              }}
             />
           </label>
         </div>

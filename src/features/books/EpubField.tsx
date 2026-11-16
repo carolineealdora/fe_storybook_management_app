@@ -61,7 +61,10 @@ export function EpubField({
           className="sr-only"
           aria-invalid={Boolean(error) || undefined}
           aria-describedby={error ? "epub-error" : undefined}
-          onChange={(e) => onChange(e.target.files?.[0] ?? null)}
+          onChange={(e) => {
+            const next = e.target.files?.[0];
+            if (next) onChange(next); // cancelled dialog: keep the current file
+          }}
         />
       </label>
       <p className="text-xs text-muted">

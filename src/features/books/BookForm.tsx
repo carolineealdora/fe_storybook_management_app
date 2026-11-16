@@ -12,6 +12,7 @@ import { ApiError, type AdminBook, type BookStatus } from "@/lib/types";
 import { AgeRangeField } from "./AgeRangeField";
 import {
   FIELD_ORDER,
+  fileFieldFor,
   coverError,
   epubError,
   initialValues,
@@ -66,15 +67,28 @@ export function BookForm({ book }: BookFormProps) {
 
     setPending(true);
     try {
-      await apiRequest(isEdit ? `/admin/books/${book!.id}` : "/admin/books", {
-        method: isEdit ? "PUT" : "POST",
-        body: toFormData(values),
-      });
+      await apiRequest(
+        isEdit
+          ? `/admin/books/${encodeURIComponent(book!.id)}`
+          : "/admin/books",
+        {
+          method: isEdit ? "PUT" : "POST",
+          body: toFormData(values),
+        },
+      );
       navigate("/books");
     } catch (err) {
       setPending(false);
+      const fileField =
+        err instanceof ApiError &&
+        ["INVALID_FILE_FORMAT", "PAYLOAD_TOO_LARGE"].includes(err.code)
+          ? fileFieldFor(err.message, values)
+          : undefined;
       if (err instanceof ApiError && err.code === "INVALID_AGE_RANGE") {
         setServerErrors({ age: err.message });
+      } else if (err instanceof ApiError && fileField) {
+        setServerErrors({ [fileField]: err.message });
+        document.getElementById(fileField)?.focus();
       } else {
         setFormError(
           err instanceof ApiError

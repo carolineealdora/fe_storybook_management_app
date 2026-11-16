@@ -4,20 +4,28 @@ import { ApiError, SERVICE_UNAVAILABLE_MESSAGE, readEnvelope } from "./types";
 /** In dev, Vite proxies /api to the backend (vite.config.ts). Set VITE_API_URL to call it directly. */
 export const API_BASE: string = import.meta.env.VITE_API_URL ?? "/api/v1";
 
-let refreshing: Promise<boolean> | null = null;
+/** "rejected" = the refresh token is no good (401); "unavailable" = we couldn't tell (network, 5xx, bad body). */
+type RefreshResult = "refreshed" | "rejected" | "unavailable";
 
-async function refreshAccessToken(): Promise<boolean> {
+let refreshing: Promise<RefreshResult> | null = null;
+
+async function refreshAccessToken(): Promise<RefreshResult> {
   const session = getSession();
-  if (!session) return false;
+  if (!session) return "rejected";
   const res = await fetch(`${API_BASE}/auth/refresh`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ refresh_token: session.refreshToken }),
   }).catch(() => null);
-  if (!res?.ok) return false;
-  const { data } = (await res.json()) as { data: { access_token: string } };
-  saveSession({ ...session, accessToken: data.access_token });
-  return true;
+  if (!res) return "unavailable";
+  if (res.status === 401) return "rejected"; // UNAUTHORIZED / REFRESH_TOKEN_EXPIRED (E21)
+  const body = (await res.json().catch(() => null)) as {
+    data?: { access_token?: string };
+  } | null;
+  const token = body?.data?.access_token;
+  if (!res.ok || !token) return "unavailable";
+  saveSession({ ...session, accessToken: token });
+  return "refreshed";
 }
 
 function send(path: string, init: RequestInit): Promise<Response> {
@@ -45,7 +53,7 @@ function endSession() {
 
 /**
  * fetch with the admin's token. On 401 TOKEN_EXPIRED it refreshes once (shared by
- * concurrent requests) and retries (E20); any other 401 ends the session.
+ * concurrent requests) and retries (E20). A rejected refresh or any other 401 ends the session.
  */
 export async function authedFetch(
   path: string,
@@ -63,7 +71,15 @@ export async function authedFetch(
   )?.error?.code;
   if (code === "TOKEN_EXPIRED") {
     refreshing ??= refreshAccessToken().finally(() => (refreshing = null));
-    if (await refreshing) return send(path, init);
+    const result = await refreshing;
+    if (result === "refreshed") return send(path, init);
+    // Backend down mid-refresh: keep the session so the admin can retry.
+    if (result === "unavailable")
+      throw new ApiError(
+        503,
+        "SERVICE_UNAVAILABLE",
+        SERVICE_UNAVAILABLE_MESSAGE,
+      );
   }
   endSession();
   return res;

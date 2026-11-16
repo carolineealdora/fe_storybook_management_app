@@ -108,6 +108,21 @@ export function validateBook(
   return errors;
 }
 
+/**
+ * Which file field a server INVALID_FILE_FORMAT / PAYLOAD_TOO_LARGE error belongs to:
+ * the only file sent, else whichever file the message names.
+ */
+// ponytail: message matching is a heuristic; a `field` in the API error body would make it exact.
+export function fileFieldFor(
+  message: string,
+  v: BookFormValues,
+): "cover" | "epub" | undefined {
+  if (v.cover && !v.epub) return "cover";
+  if (v.epub && !v.cover) return "epub";
+  if (/cover|image/i.test(message)) return "cover";
+  if (/epub|book file/i.test(message)) return "epub";
+}
+
 export function toFormData(v: BookFormValues): FormData {
   const fd = new FormData();
   fd.set("title", v.title.trim());

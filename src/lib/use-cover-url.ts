@@ -13,7 +13,8 @@ export function useCoverUrl(src: string): string | undefined {
     if (isLocal) return;
     let cancelled = false;
     let objectUrl: string | undefined;
-    authedFetch(src.replace(/^\/api\/v1/, ""))
+    // no-cache: the URL never changes when a cover is replaced, but the server sends max-age=3600.
+    authedFetch(src.replace(/^\/api\/v1/, ""), { cache: "no-cache" })
       .then((res) => (res.ok ? res.blob() : null))
       .then((blob) => {
         if (!blob || cancelled) return;
