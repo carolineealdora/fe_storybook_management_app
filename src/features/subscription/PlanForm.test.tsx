@@ -110,4 +110,16 @@ describe("PlanForm", () => {
     expect(screen.getByLabelText("Monthly price (IDR) *")).toHaveFocus();
     expect(fetchMock).not.toHaveBeenCalled();
   });
+
+  it("names the active subscriber count when the API sends it (design E4)", () => {
+    render(
+      <PlanForm
+        plan={{ ...plan, active_subscriber_count: 214 }}
+        onSaved={onSaved}
+      />,
+    );
+    expect(
+      screen.getByText(/214 active subscribers keep the price they paid/),
+    ).toBeInTheDocument();
+  });
 });

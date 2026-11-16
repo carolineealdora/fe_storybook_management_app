@@ -109,6 +109,7 @@ export function BookTable({ books, filtered, onDeleted }: BookTableProps) {
                   <DeleteBookButton
                     id={b.id}
                     title={b.title}
+                    purchaseCount={b.purchase_count}
                     onDeleted={onDeleted}
                   />
                 </div>

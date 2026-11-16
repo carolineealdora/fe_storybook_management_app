@@ -6,6 +6,8 @@ const th =
 const td = "px-4 py-2.5";
 
 export function PriceHistory({ changes }: { changes: PriceChange[] }) {
+  // The column appears once the backend sends names (docs/specs/backend-admin-extensions.md).
+  const hasNames = changes.some((c) => c.changed_by_name !== undefined);
   return (
     <section aria-labelledby="history-title" className="flex flex-col gap-2.5">
       <h2
@@ -32,6 +34,11 @@ export function PriceHistory({ changes }: { changes: PriceChange[] }) {
                 <th scope="col" className={th}>
                   New price
                 </th>
+                {hasNames && (
+                  <th scope="col" className={th}>
+                    Changed by
+                  </th>
+                )}
               </tr>
             </thead>
             <tbody>
@@ -49,6 +56,11 @@ export function PriceHistory({ changes }: { changes: PriceChange[] }) {
                   <td className={`${td} font-mono`}>
                     {formatRupiah(c.new_price)}
                   </td>
+                  {hasNames && (
+                    <td className={`${td} text-ink-2`}>
+                      {c.changed_by_name ?? "Former admin"}
+                    </td>
+                  )}
                 </tr>
               ))}
             </tbody>

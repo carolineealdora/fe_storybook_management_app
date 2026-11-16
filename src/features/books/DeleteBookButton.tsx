@@ -2,10 +2,12 @@ import { useState } from "react";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 import { apiRequest } from "@/lib/api";
 import { ApiError } from "@/lib/types";
+import { deleteMessage } from "./delete-message";
 
 interface DeleteBookButtonProps {
   id: string;
   title: string;
+  purchaseCount?: number;
   /** Called with the book title once it is gone. */
   onDeleted: (title: string) => void;
 }
@@ -13,6 +15,7 @@ interface DeleteBookButtonProps {
 export function DeleteBookButton({
   id,
   title,
+  purchaseCount,
   onDeleted,
 }: DeleteBookButtonProps) {
   const [open, setOpen] = useState(false);
@@ -66,8 +69,7 @@ export function DeleteBookButton({
           setError(undefined);
         }}
       >
-        The book will be hidden from the StoryBook showcase. Families who bought
-        it keep access in My Book, and order history stays intact.
+        {deleteMessage(purchaseCount)}
       </ConfirmDialog>
     </>
   );

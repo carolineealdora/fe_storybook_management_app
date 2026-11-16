@@ -16,6 +16,17 @@ import {
   type PlanFormErrors,
 } from "./plan-form";
 
+/** Design E4 note; names the count once the API sends it. */
+function subscriberNote(count: number | undefined) {
+  const who =
+    count === undefined
+      ? "Active subscribers keep"
+      : count === 1
+        ? "1 active subscriber keeps"
+        : `${count} active subscribers keep`;
+  return `${who} the price they paid until their period ends. Their next renewal charges the current price.`;
+}
+
 interface PlanFormProps {
   plan: AdminPlan;
   /** Receives the saved plan (with its updated price history). */
@@ -147,8 +158,7 @@ export function PlanForm({ plan, onSaved }: PlanFormProps) {
             <span className="font-mono text-xs font-semibold text-ink">
               NOTE
             </span>
-            Active subscribers keep the price they paid until their period ends.
-            Their next renewal charges the current price.
+            {subscriberNote(plan.active_subscriber_count)}
           </p>
         </section>
         <PlanPreview
