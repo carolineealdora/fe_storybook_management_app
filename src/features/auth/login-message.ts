@@ -9,6 +9,7 @@ export function loginMessage(err: unknown) {
     case "FORBIDDEN":
       return "This account can't use the back office. Admin accounts only.";
     case "VALIDATION_ERROR":
+    case "SERVICE_UNAVAILABLE":
       return err.message;
     default:
       return "We couldn't sign you in. Please try again.";

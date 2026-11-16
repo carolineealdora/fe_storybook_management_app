@@ -54,7 +54,18 @@ async function forward(
     headers,
     body,
     cache: "no-store",
-  });
+  }).catch(() => null);
+  if (!upstream) {
+    return NextResponse.json(
+      {
+        error: {
+          code: "SERVICE_UNAVAILABLE",
+          message: "The server is unavailable. Please try again shortly.",
+        },
+      },
+      { status: 503 },
+    );
+  }
 
   if (path === "admin/auth/login" && upstream.ok) {
     const { data } = (await upstream.json()) as {

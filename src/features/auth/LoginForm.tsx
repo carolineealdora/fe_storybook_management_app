@@ -7,11 +7,13 @@ import { Button } from "@/components/ui/Button";
 import { Field } from "@/components/ui/Field";
 import { Input } from "@/components/ui/Input";
 import { apiRequest } from "@/lib/client-api";
+import { ApiError } from "@/lib/types";
 import { loginMessage } from "./login-message";
 
 export function LoginForm() {
   const router = useRouter();
   const [error, setError] = useState<string>();
+  const [badCredentials, setBadCredentials] = useState(false);
   const [pending, setPending] = useState(false);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -31,6 +33,9 @@ export function LoginForm() {
       router.refresh();
     } catch (err) {
       setError(loginMessage(err));
+      setBadCredentials(
+        err instanceof ApiError && err.code === "INVALID_CREDENTIALS",
+      );
       setPending(false);
     }
   }
@@ -44,7 +49,7 @@ export function LoginForm() {
           type="email"
           autoComplete="username"
           required
-          invalid={Boolean(error)}
+          invalid={badCredentials}
         />
       </Field>
       <Field label="Password" htmlFor="password">
@@ -54,7 +59,7 @@ export function LoginForm() {
           type="password"
           autoComplete="current-password"
           required
-          invalid={Boolean(error)}
+          invalid={badCredentials}
         />
       </Field>
       {error && <Alert>{error}</Alert>}
