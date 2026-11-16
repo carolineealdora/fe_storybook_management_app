@@ -10,7 +10,7 @@ interface BookTableProps {
   books: AdminBook[];
   filtered: boolean;
   /** Called after a book is deleted, to reload the list. */
-  onDeleted: () => void;
+  onDeleted: (title: string) => void;
 }
 
 const th =

@@ -6,7 +6,8 @@ import { ApiError } from "@/lib/types";
 interface DeleteBookButtonProps {
   id: string;
   title: string;
-  onDeleted: () => void;
+  /** Called with the book title once it is gone. */
+  onDeleted: (title: string) => void;
 }
 
 export function DeleteBookButton({
@@ -39,7 +40,7 @@ export function DeleteBookButton({
     }
     setPending(false);
     setOpen(false);
-    onDeleted();
+    onDeleted(title);
   }
 
   return (

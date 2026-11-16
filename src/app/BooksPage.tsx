@@ -1,15 +1,34 @@
-import { Link, useSearchParams } from "react-router";
+import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate, useSearchParams } from "react-router";
 import { buttonStyles } from "@/components/ui/button-styles";
 import { LoadError } from "@/components/ui/LoadError";
+import { Notice } from "@/components/ui/Notice";
 import { BookFilters } from "@/features/books/BookFilters";
 import { BookListSkeleton } from "@/features/books/BookListSkeleton";
 import { BookTable } from "@/features/books/BookTable";
 import { PageHeader } from "@/features/shell/PageHeader";
+import { readNavState } from "@/lib/navigation-state";
 import type { AdminBook } from "@/lib/types";
 import { useApi } from "@/lib/use-api";
 
 export function BooksPage() {
   const [params] = useSearchParams();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [notice, setNotice] = useState(
+    () => readNavState(location.state).notice,
+  );
+
+  // Drop the one-off message from history so a reload or Back does not show it again.
+  useEffect(() => {
+    if (readNavState(location.state).notice) {
+      navigate(location.pathname + location.search, {
+        replace: true,
+        state: null,
+      });
+    }
+  }, [location, navigate]);
+
   const search = params.get("search") ?? "";
   const rawStatus = params.get("status");
   const status =
@@ -32,6 +51,9 @@ export function BooksPage() {
           </Link>
         }
       />
+      {notice && (
+        <Notice onDismiss={() => setNotice(undefined)}>{notice}</Notice>
+      )}
       {books.error ? (
         <LoadError error={books.error} onRetry={books.reload} />
       ) : !books.data ? (
@@ -42,7 +64,10 @@ export function BooksPage() {
           <BookTable
             books={books.data}
             filtered={Boolean(search) || status !== "all"}
-            onDeleted={books.reload}
+            onDeleted={(title) => {
+              setNotice(`“${title}” was deleted.`);
+              books.reload();
+            }}
           />
         </>
       )}
