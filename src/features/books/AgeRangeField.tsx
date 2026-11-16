@@ -1,5 +1,3 @@
-"use client";
-
 import { SegmentedControl } from "@/components/ui/SegmentedControl";
 import type { AgeType } from "@/lib/types";
 

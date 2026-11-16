@@ -1,14 +1,7 @@
-import { Suspense } from "react";
-import { cookies } from "next/headers";
 import { LogoutButton } from "@/features/auth/LogoutButton";
-import { EMAIL_COOKIE } from "@/lib/session";
+import { getSession } from "@/lib/session";
 import { BrandMark } from "./BrandMark";
-import { NavLinks, NavList } from "./NavLinks";
-
-async function AdminEmail() {
-  const email = (await cookies()).get(EMAIL_COOKIE)?.value;
-  return <span className="min-w-0 truncate">{email}</span>;
-}
+import { NavLinks } from "./NavLinks";
 
 /** Dark sidebar at md+, a top bar on phones. */
 export function Sidebar() {
@@ -27,14 +20,10 @@ export function Sidebar() {
         aria-label="Main"
         className="order-last w-full md:order-none md:w-auto"
       >
-        <Suspense fallback={<NavList />}>
-          <NavLinks />
-        </Suspense>
+        <NavLinks />
       </nav>
       <div className="ml-auto flex min-w-0 items-center justify-between gap-3 text-small text-nav-faint md:mt-auto md:ml-0 md:border-t md:border-nav-active md:px-2 md:pt-3.5">
-        <Suspense fallback={<span />}>
-          <AdminEmail />
-        </Suspense>
+        <span className="min-w-0 truncate">{getSession()?.email}</span>
         <LogoutButton />
       </div>
     </aside>

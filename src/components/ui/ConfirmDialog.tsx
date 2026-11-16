@@ -1,7 +1,6 @@
-"use client";
-
 import { useEffect, useId, useRef, type ReactNode } from "react";
-import { Button, type ButtonVariant } from "./Button";
+import { Button } from "./Button";
+import type { ButtonVariant } from "./button-styles";
 
 interface ConfirmDialogProps {
   open: boolean;

@@ -1,15 +1,13 @@
-"use client";
-
 import { useState, type FormEvent } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { Link, useNavigate } from "react-router";
 import { Alert } from "@/components/ui/Alert";
-import { Button, buttonStyles } from "@/components/ui/Button";
+import { Button } from "@/components/ui/Button";
+import { buttonStyles } from "@/components/ui/button-styles";
 import { Field } from "@/components/ui/Field";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import { PageHeader } from "@/features/shell/PageHeader";
-import { apiRequest } from "@/lib/client-api";
+import { apiRequest } from "@/lib/api";
 import { ApiError, type AdminBook, type BookStatus } from "@/lib/types";
 import { AgeRangeField } from "./AgeRangeField";
 import {
@@ -31,7 +29,7 @@ interface BookFormProps {
 }
 
 export function BookForm({ book }: BookFormProps) {
-  const router = useRouter();
+  const navigate = useNavigate();
   const isEdit = Boolean(book);
   const [values, setValues] = useState<BookFormValues>(() =>
     initialValues(book),
@@ -72,8 +70,7 @@ export function BookForm({ book }: BookFormProps) {
         method: isEdit ? "PUT" : "POST",
         body: toFormData(values),
       });
-      router.push("/books");
-      router.refresh();
+      navigate("/books");
     } catch (err) {
       setPending(false);
       if (err instanceof ApiError && err.code === "INVALID_AGE_RANGE") {
@@ -99,7 +96,7 @@ export function BookForm({ book }: BookFormProps) {
       <PageHeader
         breadcrumb={
           <>
-            <Link href="/books" className="hover:underline">
+            <Link to="/books" className="hover:underline">
               Master book
             </Link>{" "}
             / {label}
@@ -108,7 +105,7 @@ export function BookForm({ book }: BookFormProps) {
         title={label}
         actions={
           <>
-            <Link href="/books" className={buttonStyles("secondary")}>
+            <Link to="/books" className={buttonStyles("secondary")}>
               Cancel
             </Link>
             <Button type="submit" loading={pending}>

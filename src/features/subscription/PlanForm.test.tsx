@@ -4,8 +4,7 @@ import { describe, expect, it, vi } from "vitest";
 import type { AdminPlan } from "@/lib/types";
 import { PlanForm } from "./PlanForm";
 
-const router = { refresh: vi.fn() };
-vi.mock("next/navigation", () => ({ useRouter: () => router }));
+const onSaved = vi.fn();
 
 const plan: AdminPlan = {
   id: "p1",
@@ -29,7 +28,7 @@ const ok = () =>
 describe("PlanForm", () => {
   it("previews price and benefits live", async () => {
     const user = userEvent.setup();
-    render(<PlanForm plan={plan} />);
+    render(<PlanForm plan={plan} onSaved={onSaved} />);
     const preview = screen.getByRole("region", {
       name: "Preview in StoryBook",
     });
@@ -48,7 +47,7 @@ describe("PlanForm", () => {
   });
 
   it("disables save until something changes", () => {
-    render(<PlanForm plan={plan} />);
+    render(<PlanForm plan={plan} onSaved={onSaved} />);
     expect(screen.getByRole("button", { name: "Save changes" })).toBeDisabled();
   });
 
@@ -56,7 +55,7 @@ describe("PlanForm", () => {
     const fetchMock = ok();
     vi.stubGlobal("fetch", fetchMock);
     const user = userEvent.setup();
-    render(<PlanForm plan={plan} />);
+    render(<PlanForm plan={plan} onSaved={onSaved} />);
 
     await user.clear(screen.getByLabelText("Monthly price (IDR) *"));
     await user.type(screen.getByLabelText("Monthly price (IDR) *"), "59000");
@@ -80,14 +79,14 @@ describe("PlanForm", () => {
       benefits: "Unlock every published book\nCancel anytime",
     });
     expect(await screen.findByText("Changes saved.")).toBeInTheDocument();
-    expect(router.refresh).toHaveBeenCalled();
+    expect(onSaved).toHaveBeenCalledWith(plan);
   });
 
   it("saves a benefits-only change without the price dialog", async () => {
     const fetchMock = ok();
     vi.stubGlobal("fetch", fetchMock);
     const user = userEvent.setup();
-    render(<PlanForm plan={plan} />);
+    render(<PlanForm plan={plan} onSaved={onSaved} />);
     await user.type(
       screen.getByLabelText("Benefits (one per line) *"),
       "\nNew stories every month",
@@ -101,7 +100,7 @@ describe("PlanForm", () => {
     const fetchMock = vi.fn();
     vi.stubGlobal("fetch", fetchMock);
     const user = userEvent.setup();
-    render(<PlanForm plan={plan} />);
+    render(<PlanForm plan={plan} onSaved={onSaved} />);
     await user.clear(screen.getByLabelText("Monthly price (IDR) *"));
     await user.type(screen.getByLabelText("Monthly price (IDR) *"), "0");
     await user.click(screen.getByRole("button", { name: "Save changes" }));

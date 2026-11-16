@@ -1,11 +1,10 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import type { AdminBook } from "@/lib/types";
+import { renderRoute } from "@/test/render-route";
 import { BookForm } from "./BookForm";
 
-const router = { push: vi.fn(), refresh: vi.fn(), replace: vi.fn() };
-vi.mock("next/navigation", () => ({ useRouter: () => router }));
 URL.createObjectURL = vi.fn(() => "blob:preview");
 URL.revokeObjectURL = vi.fn();
 
@@ -36,7 +35,7 @@ describe("BookForm", () => {
     const fetchMock = vi.fn();
     vi.stubGlobal("fetch", fetchMock);
     const user = userEvent.setup();
-    render(<BookForm />);
+    renderRoute(<BookForm />, "/books/new");
 
     await user.type(screen.getByLabelText("Minimum age"), "5");
     await user.type(screen.getByLabelText("Maximum age"), "3");
@@ -57,7 +56,7 @@ describe("BookForm", () => {
 
   it("rejects a non-epub file as soon as it is picked (E15)", async () => {
     const user = userEvent.setup({ applyAccept: false });
-    render(<BookForm />);
+    renderRoute(<BookForm />, "/books/new");
     await user.upload(
       screen.getByLabelText(/Choose an \.epub file/),
       file("ollie-final.pdf"),
@@ -75,7 +74,7 @@ describe("BookForm", () => {
       );
     vi.stubGlobal("fetch", fetchMock);
     const user = userEvent.setup();
-    render(<BookForm />);
+    renderRoute(<BookForm />, "/books/new");
 
     await fillValidBook(user);
     await user.click(screen.getByLabelText("Published"));
@@ -87,7 +86,7 @@ describe("BookForm", () => {
     const body = init.body as FormData;
     expect(body.get("status")).toBe("published");
     expect(body.get("age_max")).toBe("5");
-    expect(router.push).toHaveBeenCalledWith("/books");
+    expect(await screen.findByText("Book list page")).toBeInTheDocument();
   });
 
   it("shows the server's age error next to the field", async () => {
@@ -108,13 +107,13 @@ describe("BookForm", () => {
       ),
     );
     const user = userEvent.setup();
-    render(<BookForm />);
+    renderRoute(<BookForm />, "/books/new");
     await fillValidBook(user);
     await user.click(screen.getByRole("button", { name: "Save book" }));
     expect(
       await screen.findByText("age_max must be greater."),
     ).toBeInTheDocument();
-    expect(router.push).not.toHaveBeenCalled();
+    expect(screen.queryByText("Book list page")).not.toBeInTheDocument();
   });
 
   it("edits with PUT and keeps stored files when none are picked", async () => {
@@ -142,7 +141,7 @@ describe("BookForm", () => {
       updated_at: "2026-11-02T00:00:00Z",
     };
     const user = userEvent.setup();
-    render(<BookForm book={book} />);
+    renderRoute(<BookForm book={book} />, "/books/b1/edit");
 
     expect(
       screen.getByRole("heading", { name: "Edit book" }),
@@ -150,9 +149,11 @@ describe("BookForm", () => {
     expect(screen.getByText("stars.epub")).toBeInTheDocument();
     await user.click(screen.getByRole("button", { name: "Save book" }));
 
-    const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
+    // The stored cover also loads via fetch, so pick out the save call.
+    const calls = fetchMock.mock.calls as [string, RequestInit | undefined][];
+    const [url, init] = calls.find(([, i]) => i?.method === "PUT")!;
     expect(url).toBe("/api/v1/admin/books/b1");
-    expect(init.method).toBe("PUT");
+    if (!init) throw new Error("PUT call missing");
     const body = init.body as FormData;
     expect(body.get("age_type")).toBe("plus");
     expect(body.has("cover")).toBe(false);

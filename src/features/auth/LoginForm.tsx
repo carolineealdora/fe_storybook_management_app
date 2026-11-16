@@ -1,17 +1,15 @@
-"use client";
-
 import { useState, type FormEvent } from "react";
-import { useRouter } from "next/navigation";
+import { useNavigate } from "react-router";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
 import { Field } from "@/components/ui/Field";
 import { Input } from "@/components/ui/Input";
-import { apiRequest } from "@/lib/client-api";
+import { login } from "@/lib/api";
 import { ApiError } from "@/lib/types";
 import { loginMessage } from "./login-message";
 
 export function LoginForm() {
-  const router = useRouter();
+  const navigate = useNavigate();
   const [error, setError] = useState<string>();
   const [badCredentials, setBadCredentials] = useState(false);
   const [pending, setPending] = useState(false);
@@ -22,15 +20,8 @@ export function LoginForm() {
     setPending(true);
     setError(undefined);
     try {
-      await apiRequest("/admin/auth/login", {
-        method: "POST",
-        body: JSON.stringify({
-          email: form.get("email"),
-          password: form.get("password"),
-        }),
-      });
-      router.replace("/books");
-      router.refresh();
+      await login(String(form.get("email")), String(form.get("password")));
+      navigate("/books", { replace: true });
     } catch (err) {
       setError(loginMessage(err));
       setBadCredentials(

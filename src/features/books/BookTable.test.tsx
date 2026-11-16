@@ -1,11 +1,11 @@
-import { render, screen, within } from "@testing-library/react";
+import { screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import type { AdminBook } from "@/lib/types";
+import { renderRoute } from "@/test/render-route";
 import { BookTable } from "./BookTable";
 
-const router = { refresh: vi.fn(), replace: vi.fn() };
-vi.mock("next/navigation", () => ({ useRouter: () => router }));
+const onDeleted = vi.fn();
 
 const book = (over: Partial<AdminBook>): AdminBook => ({
   id: "b1",
@@ -28,8 +28,9 @@ const book = (over: Partial<AdminBook>): AdminBook => ({
 
 describe("BookTable", () => {
   it("lists books with price, free label and status", () => {
-    render(
+    renderRoute(
       <BookTable
+        onDeleted={onDeleted}
         filtered={false}
         books={[
           book({}),
@@ -54,7 +55,9 @@ describe("BookTable", () => {
   });
 
   it("shows an empty state with an add action", () => {
-    render(<BookTable books={[]} filtered={false} />);
+    renderRoute(
+      <BookTable onDeleted={onDeleted} books={[]} filtered={false} />,
+    );
     expect(screen.getByText("No books yet.")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "+ Add book" })).toHaveAttribute(
       "href",
@@ -63,7 +66,7 @@ describe("BookTable", () => {
   });
 
   it("shows a no-results state when filtered", () => {
-    render(<BookTable books={[]} filtered />);
+    renderRoute(<BookTable onDeleted={onDeleted} books={[]} filtered />);
     expect(screen.getByRole("link", { name: "Clear filters" })).toHaveAttribute(
       "href",
       "/books",
@@ -76,7 +79,9 @@ describe("BookTable", () => {
       .mockResolvedValue(new Response(null, { status: 204 }));
     vi.stubGlobal("fetch", fetchMock);
     const user = userEvent.setup();
-    render(<BookTable books={[book({})]} filtered={false} />);
+    renderRoute(
+      <BookTable onDeleted={onDeleted} books={[book({})]} filtered={false} />,
+    );
 
     await user.click(
       screen.getByRole("button", { name: "Delete Kiko the Little Duck" }),
@@ -92,7 +97,7 @@ describe("BookTable", () => {
       "/api/v1/admin/books/b1",
       expect.objectContaining({ method: "DELETE" }),
     );
-    expect(router.refresh).toHaveBeenCalled();
+    expect(onDeleted).toHaveBeenCalled();
   });
 
   it("keeps the dialog open with the error when delete fails", async () => {
@@ -108,7 +113,9 @@ describe("BookTable", () => {
       ),
     );
     const user = userEvent.setup();
-    render(<BookTable books={[book({})]} filtered={false} />);
+    renderRoute(
+      <BookTable onDeleted={onDeleted} books={[book({})]} filtered={false} />,
+    );
     await user.click(
       screen.getByRole("button", { name: "Delete Kiko the Little Duck" }),
     );
@@ -116,6 +123,6 @@ describe("BookTable", () => {
     expect(await screen.findByRole("alert")).toHaveTextContent(
       "Server is busy.",
     );
-    expect(router.refresh).not.toHaveBeenCalled();
+    expect(onDeleted).not.toHaveBeenCalled();
   });
 });

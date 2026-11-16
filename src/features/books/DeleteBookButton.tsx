@@ -1,18 +1,19 @@
-"use client";
-
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
-import { apiRequest } from "@/lib/client-api";
+import { apiRequest } from "@/lib/api";
 import { ApiError } from "@/lib/types";
 
 interface DeleteBookButtonProps {
   id: string;
   title: string;
+  onDeleted: () => void;
 }
 
-export function DeleteBookButton({ id, title }: DeleteBookButtonProps) {
-  const router = useRouter();
+export function DeleteBookButton({
+  id,
+  title,
+  onDeleted,
+}: DeleteBookButtonProps) {
   const [open, setOpen] = useState(false);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string>();
@@ -36,7 +37,7 @@ export function DeleteBookButton({ id, title }: DeleteBookButtonProps) {
     }
     setPending(false);
     setOpen(false);
-    router.refresh();
+    onDeleted();
   }
 
   return (

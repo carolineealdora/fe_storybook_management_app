@@ -1,10 +1,9 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
+import { getSession } from "@/lib/session";
+import { renderRoute } from "@/test/render-route";
 import { LoginForm } from "./LoginForm";
-
-const router = { replace: vi.fn(), refresh: vi.fn() };
-vi.mock("next/navigation", () => ({ useRouter: () => router }));
 
 function respond(status: number, body: unknown) {
   const fetchMock = vi
@@ -16,7 +15,7 @@ function respond(status: number, body: unknown) {
 
 async function signIn(email = "admin@mainstory.id", password = "secret") {
   const user = userEvent.setup();
-  render(<LoginForm />);
+  renderRoute(<LoginForm />, "/login-form");
   await user.type(screen.getByLabelText("Email"), email);
   await user.type(screen.getByLabelText("Password"), password);
   await user.click(screen.getByRole("button", { name: "Sign in" }));
@@ -24,7 +23,13 @@ async function signIn(email = "admin@mainstory.id", password = "secret") {
 
 describe("LoginForm", () => {
   it("posts credentials and goes to the book list", async () => {
-    const fetchMock = respond(200, { data: { account_type: "admin" } });
+    const fetchMock = respond(200, {
+      data: {
+        access_token: "acc",
+        refresh_token: "ref",
+        account_type: "admin",
+      },
+    });
     await signIn();
     expect(fetchMock).toHaveBeenCalledWith(
       "/api/v1/admin/auth/login",
@@ -36,7 +41,12 @@ describe("LoginForm", () => {
         }),
       }),
     );
-    expect(router.replace).toHaveBeenCalledWith("/books");
+    expect(await screen.findByText("Book list page")).toBeInTheDocument();
+    expect(getSession()).toEqual({
+      accessToken: "acc",
+      refreshToken: "ref",
+      email: "admin@mainstory.id",
+    });
   });
 
   it("shows a wrong-credentials error", async () => {
@@ -45,7 +55,8 @@ describe("LoginForm", () => {
     expect(await screen.findByRole("alert")).toHaveTextContent(
       "Email or password is incorrect.",
     );
-    expect(router.replace).not.toHaveBeenCalled();
+    expect(screen.queryByText("Book list page")).not.toBeInTheDocument();
+    expect(getSession()).toBeNull();
   });
 
   it("refuses parent accounts (US-15)", async () => {

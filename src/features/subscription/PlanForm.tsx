@@ -1,7 +1,4 @@
-"use client";
-
 import { useState, type FormEvent } from "react";
-import { useRouter } from "next/navigation";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
@@ -9,7 +6,7 @@ import { Field } from "@/components/ui/Field";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import { PageHeader } from "@/features/shell/PageHeader";
-import { apiRequest } from "@/lib/client-api";
+import { apiRequest } from "@/lib/api";
 import { formatRupiah } from "@/lib/format";
 import { ApiError, type AdminPlan } from "@/lib/types";
 import { PlanPreview } from "./PlanPreview";
@@ -19,8 +16,13 @@ import {
   type PlanFormErrors,
 } from "./plan-form";
 
-export function PlanForm({ plan }: { plan: AdminPlan }) {
-  const router = useRouter();
+interface PlanFormProps {
+  plan: AdminPlan;
+  /** Receives the saved plan (with its updated price history). */
+  onSaved: (plan: AdminPlan) => void;
+}
+
+export function PlanForm({ plan, onSaved }: PlanFormProps) {
   const [price, setPrice] = useState(String(plan.price));
   const [benefits, setBenefits] = useState(plan.benefits);
   const [submitted, setSubmitted] = useState(false);
@@ -63,7 +65,7 @@ export function PlanForm({ plan }: { plan: AdminPlan }) {
   async function save() {
     setPending(true);
     try {
-      await apiRequest("/admin/subscription-plan", {
+      const updated = await apiRequest<AdminPlan>("/admin/subscription-plan", {
         method: "PUT",
         body: JSON.stringify({
           price: newPrice,
@@ -73,7 +75,7 @@ export function PlanForm({ plan }: { plan: AdminPlan }) {
       setConfirming(false);
       setSaved(true);
       setBenefits(normalizeBenefits(benefits));
-      router.refresh(); // reloads price history
+      onSaved(updated);
     } catch (err) {
       setConfirming(false);
       if (err instanceof ApiError && err.code === "INVALID_PRICE")

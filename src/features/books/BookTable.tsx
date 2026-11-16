@@ -1,6 +1,6 @@
-import Link from "next/link";
+import { Link } from "react-router";
 import { Badge } from "@/components/ui/Badge";
-import { buttonStyles } from "@/components/ui/Button";
+import { buttonStyles } from "@/components/ui/button-styles";
 import { formatBookPrice, formatDate } from "@/lib/format";
 import type { AdminBook } from "@/lib/types";
 import { BookCover } from "./BookCover";
@@ -9,13 +9,15 @@ import { DeleteBookButton } from "./DeleteBookButton";
 interface BookTableProps {
   books: AdminBook[];
   filtered: boolean;
+  /** Called after a book is deleted, to reload the list. */
+  onDeleted: () => void;
 }
 
 const th =
   "px-3 py-2.5 text-left font-mono text-xs font-semibold uppercase text-muted first:pl-4 last:pr-4";
 const td = "px-3 py-2.5 first:pl-4 last:pr-4";
 
-export function BookTable({ books, filtered }: BookTableProps) {
+export function BookTable({ books, filtered, onDeleted }: BookTableProps) {
   if (books.length === 0) {
     return (
       <div className="flex flex-col items-center gap-3 rounded-lg border border-line bg-surface px-6 py-14 text-center">
@@ -28,11 +30,11 @@ export function BookTable({ books, filtered }: BookTableProps) {
             : "Add your first book to start the StoryBook library."}
         </p>
         {filtered ? (
-          <Link href="/books" className={buttonStyles("secondary")}>
+          <Link to="/books" className={buttonStyles("secondary")}>
             Clear filters
           </Link>
         ) : (
-          <Link href="/books/new" className={buttonStyles()}>
+          <Link to="/books/new" className={buttonStyles()}>
             + Add book
           </Link>
         )}
@@ -98,13 +100,17 @@ export function BookTable({ books, filtered }: BookTableProps) {
               <td className={td}>
                 <div className="flex justify-end gap-3.5 text-small">
                   <Link
-                    href={`/books/${b.id}/edit`}
+                    to={`/books/${b.id}/edit`}
                     aria-label={`Edit ${b.title}`}
                     className="rounded-sm font-medium text-ink hover:underline focus-visible:outline-2 focus-visible:outline-ink"
                   >
                     Edit
                   </Link>
-                  <DeleteBookButton id={b.id} title={b.title} />
+                  <DeleteBookButton
+                    id={b.id}
+                    title={b.title}
+                    onDeleted={onDeleted}
+                  />
                 </div>
               </td>
             </tr>

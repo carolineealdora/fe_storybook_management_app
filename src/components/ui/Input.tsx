@@ -6,7 +6,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   adornment?: ReactNode;
 }
 
-export function inputBoxStyles(invalid?: boolean, className = "") {
+function inputBoxStyles(invalid?: boolean, className = "") {
   return `flex h-9.5 items-center gap-2 rounded-md border bg-surface px-3 text-sm text-ink focus-within:outline-2 focus-within:outline-offset-1 focus-within:outline-ink ${invalid ? "border-danger" : "border-line-strong"} ${className}`;
 }
 

@@ -1,7 +1,5 @@
-"use client";
-
-import { useTransition, type FormEvent } from "react";
-import { useRouter } from "next/navigation";
+import type { FormEvent } from "react";
+import { useNavigate } from "react-router";
 import { SegmentedControl } from "@/components/ui/SegmentedControl";
 import type { BookStatus } from "@/lib/types";
 
@@ -16,19 +14,20 @@ const STATUS_OPTIONS: { value: StatusFilter; label: string }[] = [
 interface BookFiltersProps {
   search: string;
   status: StatusFilter;
+  /** True while the filtered list loads. */
+  busy?: boolean;
 }
 
-/** Filters live in the URL so the server renders the filtered list (and links are shareable). */
-export function BookFilters({ search, status }: BookFiltersProps) {
-  const router = useRouter();
-  const [pending, startTransition] = useTransition();
+/** Filters live in the URL, so the filtered list survives reloads and links are shareable. */
+export function BookFilters({ search, status, busy }: BookFiltersProps) {
+  const navigate = useNavigate();
 
   function go(nextSearch: string, nextStatus: StatusFilter) {
     const params = new URLSearchParams();
     if (nextSearch.trim()) params.set("search", nextSearch.trim());
     if (nextStatus !== "all") params.set("status", nextStatus);
     const qs = params.toString();
-    startTransition(() => router.replace(qs ? `/books?${qs}` : "/books"));
+    navigate(qs ? `/books?${qs}` : "/books", { replace: true });
   }
 
   function onSearch(e: FormEvent<HTMLFormElement>) {
@@ -39,7 +38,7 @@ export function BookFilters({ search, status }: BookFiltersProps) {
   return (
     <div
       className="flex flex-wrap items-center gap-2.5"
-      aria-busy={pending || undefined}
+      aria-busy={busy || undefined}
     >
       <form role="search" onSubmit={onSearch} className="w-full sm:w-80">
         <label htmlFor="book-search" className="sr-only">
@@ -62,7 +61,7 @@ export function BookFilters({ search, status }: BookFiltersProps) {
         value={status}
         onChange={(v) => go(search, v)}
       />
-      {pending && (
+      {busy && (
         <span role="status" className="text-small text-muted">
           Loading…
         </span>

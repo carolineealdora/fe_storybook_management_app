@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useRef, useState } from "react";
 import { formatBytes } from "@/lib/format";
 import { BookCover } from "./BookCover";

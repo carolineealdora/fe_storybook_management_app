@@ -45,6 +45,9 @@ export interface ApiErrorBody {
   error: { code: string; message: string };
 }
 
+export const SERVICE_UNAVAILABLE_MESSAGE =
+  "The server is unavailable. Please try again shortly.";
+
 export class ApiError extends Error {
   constructor(
     readonly status: number,
@@ -61,6 +64,14 @@ export async function readEnvelope<T>(res: Response): Promise<T> {
   const body: unknown = await res.json().catch(() => null);
   if (!res.ok) {
     const err = (body as ApiErrorBody | null)?.error;
+    // A gateway error without the API's error body means the backend is unreachable.
+    if (!err && [502, 503, 504].includes(res.status)) {
+      throw new ApiError(
+        res.status,
+        "SERVICE_UNAVAILABLE",
+        SERVICE_UNAVAILABLE_MESSAGE,
+      );
+    }
     throw new ApiError(
       res.status,
       err?.code ?? "GENERAL_ERROR",
