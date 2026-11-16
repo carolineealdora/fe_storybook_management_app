@@ -1,0 +1,71 @@
+// Shapes from ../storybook_management_app/docs/API-contracts.md (admin section).
+
+export type BookStatus = "draft" | "published";
+export type AgeType = "range" | "plus";
+
+export interface AdminBook {
+  id: string;
+  title: string;
+  author: string;
+  description: string;
+  age_type: AgeType;
+  age_min: number;
+  age_max: number | null;
+  age_label: string;
+  price: number;
+  status: BookStatus;
+  cover_url: string;
+  epub_file_name: string;
+  epub_size_bytes: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface PriceChange {
+  id: string;
+  old_price: number;
+  new_price: number;
+  changed_by: string;
+  changed_at: string;
+}
+
+export interface AdminPlan {
+  id: string;
+  code: string;
+  name: string;
+  price: number;
+  benefits: string;
+  duration: string;
+  updated_at: string;
+  updated_by: string | null;
+  price_history: PriceChange[];
+}
+
+export interface ApiErrorBody {
+  error: { code: string; message: string };
+}
+
+export class ApiError extends Error {
+  constructor(
+    readonly status: number,
+    readonly code: string,
+    message: string,
+  ) {
+    super(message);
+  }
+}
+
+/** Unwraps `{ data }` or throws ApiError from `{ error }`. */
+export async function readEnvelope<T>(res: Response): Promise<T> {
+  if (res.status === 204) return undefined as T;
+  const body: unknown = await res.json().catch(() => null);
+  if (!res.ok) {
+    const err = (body as ApiErrorBody | null)?.error;
+    throw new ApiError(
+      res.status,
+      err?.code ?? "GENERAL_ERROR",
+      err?.message ?? "Something went wrong. Please try again.",
+    );
+  }
+  return (body as { data: T }).data;
+}
