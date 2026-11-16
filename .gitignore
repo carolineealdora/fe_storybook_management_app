@@ -15,3 +15,7 @@ npm-debug.log*
 # design handoff: keep the source html/md, skip heavy binaries
 docs/design/*.zip
 docs/design/**/*.pdf
+
+# Claude Code local state
+.claude/settings.local.json
+.claude/*.lock
