@@ -20,6 +20,19 @@ The dev server forwards `/api/*` to the backend. Set `BACKEND_URL` if it runs el
 For a deployed build, either serve it behind the same `/api` path or set `VITE_API_URL`
 (e.g. `https://api.example.com/api/v1`) at build time.
 
+## Deploy
+
+The `Dockerfile` builds the app and serves it with nginx (`deploy/nginx/`) on port 8080:
+
+```bash
+docker build -t storybook-admin .
+docker run -p 8080:8080 -e BACKEND_ORIGIN=http://<backend-host>:9999 storybook-admin
+```
+
+nginx serves the app, falls back to `index.html` for app routes, proxies `/api/` to `BACKEND_ORIGIN` (same origin,
+so the backend needs no CORS), caches `/assets/` for a year, and adds security headers. The Content-Security-Policy
+itself is a `<meta>` tag added to production builds (`vite.config.ts`). Add HSTS at your TLS terminator.
+
 ## How auth works
 
 `src/lib/api.ts` logs in with `POST /admin/auth/login` and keeps the tokens in `localStorage`
