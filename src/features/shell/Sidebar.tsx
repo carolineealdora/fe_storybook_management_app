@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import { LogoutButton } from "@/features/auth/LogoutButton";
 import { EMAIL_COOKIE } from "@/lib/session";
 import { BrandMark } from "./BrandMark";
-import { NavLinks } from "./NavLinks";
+import { NavLinks, NavList } from "./NavLinks";
 
 async function AdminEmail() {
   const email = (await cookies()).get(EMAIL_COOKIE)?.value;
@@ -27,7 +27,9 @@ export function Sidebar() {
         aria-label="Main"
         className="order-last w-full md:order-none md:w-auto"
       >
-        <NavLinks />
+        <Suspense fallback={<NavList />}>
+          <NavLinks />
+        </Suspense>
       </nav>
       <div className="ml-auto flex min-w-0 items-center justify-between gap-3 text-small text-nav-faint md:mt-auto md:ml-0 md:border-t md:border-nav-active md:px-2 md:pt-3.5">
         <Suspense fallback={<span />}>

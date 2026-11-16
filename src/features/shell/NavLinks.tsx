@@ -8,8 +8,12 @@ const links = [
   { href: "/subscription", label: "Subscription" },
 ] as const;
 
+/** Reads the URL, so it must render inside <Suspense> (fallback: <NavList />). */
 export function NavLinks() {
-  const pathname = usePathname();
+  return <NavList pathname={usePathname()} />;
+}
+
+export function NavList({ pathname = "" }: { pathname?: string }) {
   return (
     <ul className="flex gap-1 md:flex-col">
       {links.map(({ href, label }) => {
