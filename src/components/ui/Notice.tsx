@@ -4,6 +4,7 @@ interface NoticeProps {
   /** Success message after an action (saved, deleted); nothing shows while undefined. */
   message?: string;
   onDismiss: () => void;
+  className?: string;
 }
 
 /**
@@ -12,7 +13,7 @@ interface NoticeProps {
  * so keyboard users aren't stranded when the element they used (a deleted row's
  * button) disappears.
  */
-export function Notice({ message, onDismiss }: NoticeProps) {
+export function Notice({ message, onDismiss, className = "" }: NoticeProps) {
   const box = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -23,7 +24,7 @@ export function Notice({ message, onDismiss }: NoticeProps) {
   }, [message]);
 
   return (
-    <div role="status">
+    <div role="status" className={className}>
       {message && (
         <div
           ref={box}

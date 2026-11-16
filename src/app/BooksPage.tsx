@@ -64,7 +64,12 @@ export function BooksPage() {
           </Link>
         }
       />
-      <Notice message={notice} onDismiss={() => setNotice(undefined)} />
+      {/* empty:-mt-5 cancels the page's flex gap while there is no message */}
+      <Notice
+        message={notice}
+        onDismiss={() => setNotice(undefined)}
+        className="empty:-mt-5"
+      />
       <p role="status" className="sr-only">
         {resultsAnnouncement(books.loading, books.data?.length, filtered)}
       </p>

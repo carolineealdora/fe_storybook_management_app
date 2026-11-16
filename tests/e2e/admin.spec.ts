@@ -4,7 +4,8 @@ import path from "node:path";
 // Needs the Go backend running with the seeded admin account.
 const email = process.env.E2E_ADMIN_EMAIL;
 const password = process.env.E2E_ADMIN_PASSWORD;
-const fixture = (name: string) => path.join(__dirname, "fixtures", name);
+const fixture = (name: string) =>
+  path.join(import.meta.dirname, "fixtures", name);
 
 async function signIn(page: Page) {
   await page.goto("/login");
