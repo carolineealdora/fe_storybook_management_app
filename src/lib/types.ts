@@ -17,7 +17,7 @@ export interface AdminBook {
   cover_url: string;
   epub_file_name: string;
   epub_size_bytes: number;
-  /** Owners of the book. Proposed field: docs/specs/backend-admin-extensions.md. */
+  /** Owners of the book. Optional so an older backend (before STORY-5) still works. */
   purchase_count?: number;
   created_at: string;
   updated_at: string;
@@ -28,7 +28,7 @@ export interface PriceChange {
   old_price: number;
   new_price: number;
   changed_by: string;
-  /** Proposed field (null if the admin no longer exists). */
+  /** Editing admin's name (STORY-5); null if the admin no longer exists. */
   changed_by_name?: string | null;
   changed_at: string;
 }
@@ -43,7 +43,7 @@ export interface AdminPlan {
   updated_at: string;
   updated_by: string | null;
   price_history: PriceChange[];
-  /** Proposed field: active, unexpired subscriptions. */
+  /** Active, unexpired subscriptions (STORY-5). */
   active_subscriber_count?: number;
 }
 

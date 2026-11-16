@@ -3,7 +3,7 @@ Classification: INTERNAL
 # Plan: admin counts, price-history names, and CORS lockdown (backend)
 
 **For:** `storybook_management_app` (Go backend). **Requested by:** the Book Management frontend (`fe_storybook_management_app`).
-**Status:** proposed. Needs annotation and confirmation before any code, per the backend's CLAUDE.md (plan mode + TDD).
+**Status:** implemented on backend branch `feat/STORY-5-admin-counts-cors` (stacked on STORY-4), 2026-11-16. Not yet merged.
 **Order:** apply **after** `feat/STORY-4-split-role-surface` is merged. That branch has uncommitted changes to
 `adminbook/controller.go`, `adminbook/service.go` and `PLAN.md`, which this plan also touches.
 
