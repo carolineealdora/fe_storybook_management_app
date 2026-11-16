@@ -34,7 +34,16 @@ export function BookFilters({ search, status, busy }: BookFiltersProps) {
     if (search !== text.trim()) setText(search);
   }
 
+  const pending = useRef<string>(undefined);
+
   useEffect(() => () => clearTimeout(timer.current), []);
+
+  // The URL's search changed from outside while a typed search was waiting
+  // (e.g. "Clear filters"): drop the stale search instead of re-applying it.
+  useEffect(() => {
+    if (pending.current !== undefined && search !== pending.current)
+      clearTimeout(timer.current);
+  }, [search]);
 
   function go(nextSearch: string, nextStatus: StatusFilter) {
     clearTimeout(timer.current); // a pending typed search is folded into this navigation
@@ -52,6 +61,7 @@ export function BookFilters({ search, status, busy }: BookFiltersProps) {
 
   function onType(value: string) {
     setText(value);
+    pending.current = value.trim();
     clearTimeout(timer.current);
     timer.current = setTimeout(() => go(value, status), SEARCH_DEBOUNCE_MS);
   }
@@ -83,7 +93,7 @@ export function BookFilters({ search, status, busy }: BookFiltersProps) {
         onChange={(v) => go(text, v)}
       />
       {busy && (
-        <span role="status" className="text-small text-muted">
+        <span aria-hidden className="text-small text-muted">
           Loading…
         </span>
       )}

@@ -87,4 +87,25 @@ describe("BookFilters", () => {
       screen.getByRole("searchbox", { name: "Search by title" }),
     ).toHaveValue("");
   });
+
+  it("a pending search does not undo Clear filters (review #3)", async () => {
+    const user = userEvent.setup();
+    const ui = (search: string) => (
+      <MemoryRouter initialEntries={["/books?search=bear"]}>
+        <BookFilters search={search} status="all" />
+        <Location />
+      </MemoryRouter>
+    );
+    const { rerender } = render(ui("bear"));
+    await user.type(
+      screen.getByRole("searchbox", { name: "Search by title" }),
+      "x",
+    );
+    rerender(ui("")); // "Clear filters" changed the URL while "bearx" was pending
+    await new Promise((r) => setTimeout(r, 400));
+    expect(screen.getByLabelText("query")).not.toHaveTextContent("bearx");
+    expect(
+      screen.getByRole("searchbox", { name: "Search by title" }),
+    ).toHaveValue("");
+  });
 });

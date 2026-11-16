@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createMemoryRouter, RouterProvider } from "react-router";
 import { describe, expect, it, vi } from "vitest";
@@ -89,8 +89,16 @@ describe("BooksPage notices (item 16)", () => {
         name: "Delete book",
       }),
     );
-    expect(
-      await screen.findByText("“Kiko the Little Duck” was deleted."),
-    ).toBeInTheDocument();
+    const notice = await screen.findByText(
+      "“Kiko the Little Duck” was deleted.",
+    );
+    // Focus moves to the message instead of being lost with the removed row (review #1).
+    await waitFor(() => expect(notice.closest("[tabindex]")).toHaveFocus());
+  });
+
+  it("announces the number of results to screen readers (review #2)", async () => {
+    stubApi();
+    renderAt();
+    expect(await screen.findByText("1 book")).toBeInTheDocument();
   });
 });
